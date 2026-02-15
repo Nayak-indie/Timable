@@ -1,4 +1,20 @@
+
 import streamlit as st
+import streamlit as st
+from datetime import timedelta
+import time
+import numpy as np
+from storage import (
+    load_teachers, save_teachers, 
+    load_classes, save_classes, 
+    load_config, save_config,
+    load_priority_configs, save_priority_configs,
+    load_base_timetable, clear_base_timetable,
+    load_scenario_state, clear_scenario_state,
+    is_demo_loaded, set_demo_loaded, clear_demo_loaded # <--- THIS FIXES THE NEW ERROR
+)
+from models import Teacher, Class, ClassSubject, SchoolConfig
+from datetime import timedelta
 # --- PHASE 10: TESTING CHECKLIST ---
 def show_testing_checklist():
     st.markdown("""
@@ -55,11 +71,7 @@ def stable_panel(panel_func, *args, **kwargs):
 
 # Add global CSS for fixed-height containers and lock layout
 st.markdown("""
-<style>
-.fixed-table { min-height: 220px; max-height: 220px; overflow-y: auto; }
-.stable-panel { min-height: 120px; }
-body, .main, .block-container { scroll-behavior: smooth; }
-</style>
+
 """, unsafe_allow_html=True)
 # --- PHASE 7: USER-VISIBLE CHANGE FEEDBACK ---
 def queue_notification(msg, duration=3):
@@ -432,39 +444,6 @@ st.markdown(ANIMATION_CSS, unsafe_allow_html=True)
 # SESSION STATE — Load from disk
 # ---------------------------------------------------------------------------
 
-def _init_session():
-    if "initialized" not in st.session_state:
-        st.session_state.teachers = load_teachers()
-        st.session_state.classes = load_classes()
-        st.session_state.priority_configs = load_priority_configs()
-        st.session_state.config = load_config()
-        st.session_state.initialized = True
-
-    if "class_timetable" not in st.session_state:
-        st.session_state.class_timetable = None
-    if "teacher_timetable" not in st.session_state:
-        st.session_state.teacher_timetable = None
-    if "notifications" not in st.session_state:
-        st.session_state.notifications = []  # List of {msg, until, id}
-    if "editing_teacher" not in st.session_state:
-        st.session_state.editing_teacher = None
-    if "editing_class" not in st.session_state:
-        st.session_state.editing_class = None
-    if "form_teacher" not in st.session_state:
-        st.session_state.form_teacher = {"id": "", "subjects": "", "sections": "", "max": 6}
-    if "form_class" not in st.session_state:
-        st.session_state.form_class = {"id": "", "subjects": ""}
-    if "scenario_state" not in st.session_state:
-        st.session_state.scenario_state = load_scenario_state()
-    # Restore base timetable from disk if we have none
-    if st.session_state.class_timetable is None:
-        base_data = load_base_timetable()
-        if base_data:
-            st.session_state.class_timetable = deserialize_timetable(base_data)
-            st.session_state.teacher_timetable = invert_to_teacher_timetable(
-                st.session_state.class_timetable, st.session_state.config
-            )
-
 
 
 
@@ -585,7 +564,6 @@ def show_toast(msg: str, duration_sec: int = 3) -> None:
         "id": uid,
     })
 
-
 @st.fragment(run_every=timedelta(seconds=1))
 def _notification_ticker():
     """
@@ -617,6 +595,12 @@ def _notification_ticker():
 # ---------------------------------------------------------------------------
 
 st.sidebar.title("⚙️ School Setup")
+
+if "config" not in st.session_state:
+    from storage import load_config
+    from models import SchoolConfig
+    st.session_state.config = load_config() or SchoolConfig()
+
 cfg = st.session_state.config
 
 with st.sidebar.form("sidebar_config", clear_on_submit=False):
@@ -704,6 +688,29 @@ if st.sidebar.button("🗑️ Clear all data"):
 # ---------------------------------------------------------------------------
 
 st.title("📅 Smart Timetable Builder")
+
+def _init_session():
+    import storage
+    
+    # 1. Load Data from storage
+    if "initialized" not in st.session_state:
+        st.session_state.teachers = storage.load_teachers()
+        st.session_state.classes = storage.load_classes()
+        st.session_state.config = storage.load_config() or SchoolConfig()
+        # Fix for the scenario error you saw earlier
+        st.session_state.scenario_state = storage.load_scenario_state() or {"selected_day": 0, "scenarios": {}}
+        st.session_state.initialized = True
+
+    # 2. UI State Defaults (Fixes your current "editing_teacher" error)
+    if "editing_teacher" not in st.session_state:
+        st.session_state.editing_teacher = None
+    if "editing_class" not in st.session_state:
+        st.session_state.editing_class = None
+    if "class_timetable" not in st.session_state:
+        st.session_state.class_timetable = None
+
+# Call the function right after defining it
+_init_session()
 st.markdown("*Smooth, stable, alive. Data persists across refresh.*")
 
 # Notification slot — fixed height to prevent layout shift
@@ -1516,3 +1523,5 @@ with tab9:
                 show_toast("Teacher PDF downloaded")
     else:
         st.info("Generate a timetable first.")
+
+# Ensure the app initializes even if functions were defined late
