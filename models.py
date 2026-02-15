@@ -7,9 +7,9 @@ from typing import List, Dict, Optional
 
 @dataclass
 class Teacher:
-    id: str
+    teacher_id: str  # We use teacher_id to match your storage.py
     name: str
-    subjects: List[str]
+    subjects: List[str] = field(default_factory=list)
     max_periods_per_day: int = 6
     max_periods_per_week: int = 30
 

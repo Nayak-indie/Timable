@@ -188,13 +188,13 @@ def _teacher_to_dict(t: Teacher) -> dict:
     }
 
 
-def _dict_to_teacher(d: dict) -> Teacher:
-    """Convert dict from JSON back to Teacher."""
+def _dict_to_teacher(d):
+    # We only pull out the parts the Teacher class actually knows how to handle
     return Teacher(
-        teacher_id=d["teacher_id"],
+        name=d.get("name", "Unknown"),
         subjects=d.get("subjects", []),
         sections=d.get("sections", []),
-        max_periods_per_day=d.get("max_periods_per_day", 6),
+        max_periods_per_day=d.get("max_periods_per_day", 6)
     )
 
 
