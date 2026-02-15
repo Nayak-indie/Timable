@@ -1,43 +1,10 @@
 """
-🧪 WHAT-IF SCENARIO ENGINE
-==========================
-Applies temporary overlays to base timetable without mutating it.
-Base → Scenario Overlay → Live View
+scenarios.py — Minimal placeholder for scenario/config logic in Timable
 """
-
-import copy
-from typing import Dict, List, Tuple, Any, Optional
-
-from models import Teacher, Class, SchoolConfig, get_break_name
+# (Extend with scenario features as needed)
 
 
-def _tt_key(cid: str, d: int, p: int) -> str:
-    """Serialize timetable key for JSON."""
-    return f"{cid}|{d}|{p}"
-
-
-def _parse_key(k: str) -> Tuple[str, int, int]:
-    cid, d, p = k.split("|")
-    return (cid, int(d), int(p))
-
-
-def serialize_timetable(tt: Dict[Tuple[str, int, int], Tuple[str, str]]) -> dict:
-    """Convert timetable to JSON-serializable dict."""
-    return {_tt_key(c, d, p): [s, t] for (c, d, p), (s, t) in tt.items()}
-
-
-def deserialize_timetable(data: dict) -> Dict[Tuple[str, int, int], Tuple[str, str]]:
-    """Restore timetable from JSON dict."""
-    return {_parse_key(k): (v[0], v[1]) for k, v in data.items()}
-
-
-def apply_scenarios(
-    base_tt: Dict[Tuple[str, int, int], Tuple[str, str]],
-    config: SchoolConfig,
-    teachers: List[Teacher],
-    classes: List[Class],
-    scenario_state: dict,
-) -> Dict[Tuple[str, int, int], Tuple[str, str]]:
+def apply_scenario_overlay(base_tt, scenario_state, config, teachers):
     """
     Apply scenario overlays to base timetable. Never mutates base.
     Returns resolved view.

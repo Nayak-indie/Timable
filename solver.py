@@ -38,6 +38,38 @@ def build_class_subject_teacher_map(classes: List[Class]) -> Dict[Tuple[str, str
     return m
 
 
+    """
+    solver.py — Timetable logic for Timable
+    """
+    from typing import List, Dict, Tuple
+    from models import Class, Teacher, SchoolConfig
+
+    def build_timetable(classes: List[Class], teachers: List[Teacher], config: SchoolConfig) -> Dict[Tuple[str, int, int], Tuple[str, str]]:
+        """
+        Build a timetable: (class_id, day_idx, period_idx) -> (subject, teacher_id)
+        Simple greedy algorithm: fill periods for each class, assign teachers if available.
+        """
+        timetable = {}
+        teacher_load = {t.id: {d: 0 for d in range(len(config.days))} for t in teachers}
+        for c in classes:
+            periods_needed = []
+            for subj in c.subjects:
+                for _ in range(subj.weekly_periods):
+                    periods_needed.append((subj.subject, subj.teacher_id))
+            slot_idx = 0
+            for d in range(len(config.days)):
+                for p in range(config.periods_per_day):
+                    if slot_idx >= len(periods_needed):
+                        break
+                    if p in config.break_periods:
+                        continue
+                    subject, teacher_id = periods_needed[slot_idx]
+                    # Check teacher load
+                    if teacher_load[teacher_id][d] < next((t.max_periods_per_day for t in teachers if t.id == teacher_id), 6):
+                        timetable[(c.id, d, p)] = (subject, teacher_id)
+                        teacher_load[teacher_id][d] += 1
+                        slot_idx += 1
+        return timetable
 def solve_timetable(
     config: SchoolConfig,
     teachers: List[Teacher],

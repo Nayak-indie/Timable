@@ -1,42 +1,21 @@
 """
-🔥 HEATMAP RENDERING
-====================
-Visual heatmaps for teacher load, class fatigue, day congestion, clash risk.
-Uses pandas Styler for cell coloring.
+heatmaps.py — Minimal visualizations for Timable
 """
-
 import pandas as pd
-from typing import Dict, List
+import streamlit as st
 
-
-def _color_scale(val: float, low_rgb: str = "#22c55e", mid_rgb: str = "#eab308", high_rgb: str = "#ef4444") -> str:
-    """Value 0-1 -> green (light) to red (overloaded)."""
-    if val <= 0:
-        return f"background-color: {low_rgb}; color: white;"
-    if val >= 1:
-        return f"background-color: {high_rgb}; color: white;"
-    if val < 0.5:
-        return f"background-color: {mid_rgb}; color: black;"
-    return f"background-color: {high_rgb}; color: white;"
-
-
-def render_teacher_load_heatmap(
-    teacher_days: Dict[str, Dict[int, int]],
-    days: List[str],
-    teacher_max: Dict[str, int],
-) -> pd.DataFrame:
-    """Rows=teachers, Cols=days. Color by load vs max."""
-    teachers = sorted(teacher_days.keys())
-    data = []
-    for tid in teachers:
-        row = []
-        for d in range(len(days)):
-            count = teacher_days.get(tid, {}).get(d, 0)
-            row.append(count)
-        data.append(row)
-    df = pd.DataFrame(data, index=teachers, columns=days)
-    max_vals = df.max().max() or 1
-
+def teacher_load_heatmap(timetable, teachers, config):
+    """Show a heatmap of teacher load per day."""
+    data = {t.id: [0]*len(config.days) for t in teachers}
+    for (class_id, day, period), (subject, teacher_id) in timetable.items():
+        data[teacher_id][day] += 1
+    df = pd.DataFrame(data, index=config.days)
+    st.write("### Teacher Load Heatmap")
+    st.dataframe(df.T)
+    st.write("(Rows: Teachers, Columns: Days)")
+    
+    max_vals = df.T.max().max() if not df.empty else 0
+    
     def _style(val):
         if pd.isna(val):
             return ""

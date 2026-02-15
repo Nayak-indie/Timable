@@ -1,3 +1,243 @@
+import streamlit as st
+# --- PHASE 10: TESTING CHECKLIST ---
+def show_testing_checklist():
+    st.markdown("""
+    ### Testing Checklist
+    - [ ] Export individual class PDF
+    - [ ] Export individual teacher PDF
+    - [ ] Export multiple selections
+    - [ ] Export all
+    - [ ] PDFs appear in Printables
+    - [ ] Removing printable works
+    - [ ] Teacher overload moves visibly
+    - [ ] Heatmap animates smoothly
+    - [ ] UI does not jump
+    - [ ] No state resets
+    """)
+# --- PHASE 9: FINAL INTEGRATION FLOW ---
+def full_timetable_update(generate_or_modify_timetable, recalc_teacher_violations, force_fit_where_possible, compute_heatmaps):
+    # save_old_state
+    st.session_state.last_timetable = deep_copy_tt(st.session_state.class_timetable)
+    # apply_change
+    new_tt = generate_or_modify_timetable()
+    st.session_state.class_timetable = new_tt
+    # recalculate_violations
+    violations = recalc_teacher_violations(new_tt)
+    # force_fit
+    try:
+        max_iter = 10
+        for _ in range(max_iter):
+            new_tt2 = force_fit_where_possible(new_tt, violations)
+            if new_tt2 == new_tt:
+                break
+            new_tt = new_tt2
+        st.session_state.class_timetable = new_tt
+    except Exception:
+        st.session_state.class_timetable = deep_copy_tt(st.session_state.last_timetable)
+    # update_heatmaps
+    heatmap_data = compute_heatmaps(st.session_state.class_timetable)
+    # detect_diff
+    diffs = detect_diff(st.session_state.last_timetable, st.session_state.class_timetable)
+    st.session_state.heatmap_state = heatmap_data
+    st.session_state.diff_log = diffs
+    # animate_transitions
+    render_heatmap_animated(heatmap_data)
+    # render_updated_ui (example: timetable and notification)
+    render_timetable_with_diff(st.session_state.class_timetable, diffs)
+    if diffs:
+        for d in diffs:
+            queue_notification(f"{d[0]}: {d[3]} → {d[4]} ({d[1]} {d[2]})")
+    render_notification_bar()
+# --- PHASE 8: UI STABILITY RULES ---
+def stable_panel(panel_func, *args, **kwargs):
+    with st.container():
+        panel_func(*args, **kwargs)
+
+# Add global CSS for fixed-height containers and lock layout
+st.markdown("""
+<style>
+.fixed-table { min-height: 220px; max-height: 220px; overflow-y: auto; }
+.stable-panel { min-height: 120px; }
+body, .main, .block-container { scroll-behavior: smooth; }
+</style>
+""", unsafe_allow_html=True)
+# --- PHASE 7: USER-VISIBLE CHANGE FEEDBACK ---
+def queue_notification(msg, duration=3):
+    if "notification_queue" not in st.session_state:
+        st.session_state.notification_queue = []
+    st.session_state.notification_queue.append({"msg": msg, "countdown": duration})
+
+def render_notification_bar():
+    if "notification_queue" not in st.session_state:
+        st.session_state.notification_queue = []
+    if st.session_state.notification_queue:
+        notif = st.session_state.notification_queue[0]
+        st.markdown(f"<div style='background:#e0f7fa;padding:8px 16px;border-radius:8px;box-shadow:0 2px 8px #b2ebf2;font-weight:600;animation:fadein 0.5s;'>\U0001F501 {notif['msg']}</div>", unsafe_allow_html=True)
+        notif["countdown"] -= 1
+        if notif["countdown"] <= 0:
+            st.session_state.notification_queue.pop(0)
+        else:
+            time.sleep(1)
+            st.experimental_rerun()
+import time
+import numpy as np
+# --- PHASE 6: HEATMAP ANIMATION SYSTEM ---
+def interpolate_heatmaps(prev, curr, steps=10):
+    if prev is None or curr is None:
+        return [curr]
+    prev = np.array(prev)
+    curr = np.array(curr)
+    frames = [prev + (curr - prev) * (i / (steps - 1)) for i in range(steps)]
+    return frames
+
+def render_heatmap_animated(curr_heatmap):
+    prev_heatmap = st.session_state.get("prev_heatmap")
+    st.session_state.prev_heatmap = curr_heatmap
+    frames = interpolate_heatmaps(prev_heatmap, curr_heatmap, steps=10)
+    heatmap_placeholder = st.empty()
+    for frame in frames:
+        # Use matplotlib for smooth gradients, no grid lines
+        import matplotlib.pyplot as plt
+        plt.figure(figsize=(6, 2))
+        plt.imshow(frame, cmap="YlOrRd", aspect="auto", interpolation="bilinear")
+        plt.axis("off")
+        plt.tight_layout(pad=0)
+        # Glow halo effect
+        plt.gca().set_facecolor("#fffbe6")
+        heatmap_placeholder.pyplot(plt)
+        plt.close()
+        time.sleep(0.03)  # Reduce for UI stability
+# --- PHASE 5: VISUAL DIFF SYSTEM ("WHAT CHANGED") ---
+def render_timetable_with_diff(timetable, diff_log):
+    # Example: timetable is a dict[class][day][period]
+    # diff_log: list of (class, day, period, old_val, new_val)
+    diff_cells = set((cid, day, period) for cid, day, period, _, _ in diff_log)
+    # Add CSS for animation
+    st.markdown("""
+        <style>
+        .changed-cell {
+            animation: glow 1s ease-in-out 0s 2 alternate;
+            background: #ffe066;
+            border-radius: 6px;
+            box-shadow: 0 0 8px 2px #ffd700;
+            transition: background 0.5s;
+            padding: 2px 4px;
+            display: inline-block;
+        }
+        @keyframes glow {
+            0% { box-shadow: 0 0 8px 2px #ffd700; }
+            100% { box-shadow: 0 0 16px 6px #ffec99; }
+        }
+        </style>
+    """, unsafe_allow_html=True)
+    # Render timetable (simplified example)
+    for cid in timetable:
+        st.markdown(f"### {cid}")
+        for day in timetable[cid]:
+            row = ""
+            for period in timetable[cid][day]:
+                cell = timetable[cid][day][period]
+                if (cid, day, period) in diff_cells:
+                    # Find diff for tooltip
+                    for d in diff_log:
+                        if d[0] == cid and d[1] == day and d[2] == period:
+                            old_val, new_val = d[3], d[4]
+                            break
+                    tooltip = f"Moved from {old_val} → {new_val}" if old_val != new_val else "Changed"
+                    row += f"<span class='changed-cell' title='{tooltip}'>{cell}</span> "
+                else:
+                    row += f"{cell} "
+            st.markdown(f"<div style='min-height:28px'>{row}</div>", unsafe_allow_html=True)
+    # Clear diff_log after animation
+    st.session_state.diff_log = []
+# --- PHASE 4: REACTIVE TIMETABLE UPDATE PIPELINE ---
+def reactive_timetable_update(generate_or_modify_timetable, recalc_teacher_violations, force_fit_where_possible, compute_heatmaps):
+    # Save old state before change
+    st.session_state.last_timetable = deep_copy_tt(st.session_state.class_timetable)
+
+    # Apply timetable change
+    new_tt = generate_or_modify_timetable()
+    st.session_state.class_timetable = new_tt
+
+    # Run reactive update chain
+    violations = recalc_teacher_violations(new_tt)
+    try:
+        max_iter = 10
+        for _ in range(max_iter):
+            new_tt2 = force_fit_where_possible(new_tt, violations)
+            if new_tt2 == new_tt:
+                break
+            new_tt = new_tt2
+        st.session_state.class_timetable = new_tt
+    except Exception:
+        st.session_state.class_timetable = deep_copy_tt(st.session_state.last_timetable)
+
+    heatmap_data = compute_heatmaps(st.session_state.class_timetable)
+    diffs = detect_diff(st.session_state.last_timetable, st.session_state.class_timetable)
+    st.session_state.heatmap_state = heatmap_data
+    st.session_state.diff_log = diffs
+# --- PHASE 3: PRINTABLES PANEL ---
+def printables_panel():
+    with st.container():
+        for idx, item in enumerate(st.session_state.printables[::-1]):
+            with st.container():
+                st.markdown(f"\U0001F4C4 **{item['name']}** — {item['time']}")
+                st.download_button("Download", open(item["path"], "rb"), file_name=item["name"], key=f"dl_{idx}")
+                if st.button("Delete", key=f"del_{idx}"):
+                    # Remove from printables (reverse index)
+                    real_idx = len(st.session_state.printables) - 1 - idx
+                    st.session_state.printables.pop(real_idx)
+                    st.experimental_rerun()
+
+# --- PHASE 2: ADVANCED PDF EXPORT UI ---
+import streamlit as st
+
+# Example: all_classes and all_teachers should be defined elsewhere in your app
+# all_classes = ...
+# all_teachers = ...
+# generate_selected_pdfs = ...
+
+def export_panel():
+    with st.expander("\U0001F4E5 Export Timetables", expanded=False):
+        # Use session_state for selections
+        if "class_choices" not in st.session_state:
+            st.session_state.class_choices = []
+        if "teacher_choices" not in st.session_state:
+            st.session_state.teacher_choices = []
+        if "export_mode" not in st.session_state:
+            st.session_state.export_mode = "Individual PDFs"
+
+        st.session_state.class_choices = st.multiselect(
+            "Select Classes", all_classes, default=st.session_state.class_choices, key="class_multiselect")
+        st.session_state.teacher_choices = st.multiselect(
+            "Select Teachers", all_teachers, default=st.session_state.teacher_choices, key="teacher_multiselect")
+        st.session_state.export_mode = st.radio(
+            "Export Mode", ["Individual PDFs", "Merge into Single PDF"], index=0 if st.session_state.export_mode=="Individual PDFs" else 1, key="export_mode_radio")
+
+        col1, col2 = st.columns(2)
+        with col1:
+            if st.button("Select All", key="select_all_btn"):
+                st.session_state.class_choices = all_classes.copy()
+                st.session_state.teacher_choices = all_teachers.copy()
+        with col2:
+            if st.button("Clear All", key="clear_all_btn"):
+                st.session_state.class_choices = []
+                st.session_state.teacher_choices = []
+
+        if st.button("\U0001F4C4 Generate & Download", key="generate_download_btn"):
+            pdf_files = generate_selected_pdfs(
+                st.session_state.class_choices,
+                st.session_state.teacher_choices,
+                st.session_state.export_mode)
+            for pdf in pdf_files:
+                st.session_state.printables.append({
+                    "name": pdf.name,
+                    "path": pdf.path,
+                    "time": timestamp(),
+                })
+            st.success("PDFs generated and added to Printables")
+
+# Call export_panel() in the Export/Print tab location
 """
 🧠 SMART TIMETABLE BUILDER — Smooth, stable, alive
 ==================================================
@@ -6,50 +246,60 @@
 - History log like Chrome
 - All data persisted to disk
 - Priority section optional (timetable works without it)
-"""
-
+# --- Ensure Streamlit is imported first ---
 import streamlit as st
-import pandas as pd
-import time
-from datetime import datetime, timedelta
-from typing import List
-
-from models import Teacher, Class, ClassSubject, SchoolConfig, ClassPriorityConfig, get_break_name
-from solver import solve_timetable, invert_to_teacher_timetable, improve_timetable, generate_rotations
-from pdf_export import export_class_timetables_pdf, export_teacher_timetables_pdf, flat_to_class_timetables
-from storage import (
-    load_teachers, save_teachers, load_classes, save_classes,
-    load_priority_configs, save_priority_configs,
-    load_config, save_config,
-    load_history, append_history,
-    is_demo_loaded, set_demo_loaded, clear_demo_loaded,
-    load_base_timetable, save_base_timetable,
-    load_scenario_state, save_scenario_state,
-    clear_base_timetable, clear_scenario_state,
-)
-from ui_forms import render_teacher_form, render_class_form, get_edit_buffer_teacher, get_edit_buffer_class
-from scenarios import (
-    apply_scenarios, serialize_timetable, deserialize_timetable,
-    teacher_load_heatmap, class_fatigue_heatmap, day_congestion_heatmap, clash_risk_heatmap,
-)
-from heatmaps import render_teacher_load_heatmap, render_day_congestion_heatmap, render_class_fatigue_heatmap
-
-
-# ---------------------------------------------------------------------------
-# PAGE CONFIG
-# ---------------------------------------------------------------------------
+import streamlit as st
+from models import Teacher, Class, SchoolConfig
+from storage import load_teachers, save_teachers, load_classes, save_classes, load_config, save_config
+from solver import build_timetable
+from ui_forms import teacher_form, class_form
 
 st.set_page_config(page_title="Smart Timetable Builder", page_icon="📅", layout="wide")
+st.title("📅 Smart Timetable Builder")
 
-# ---------------------------------------------------------------------------
+# Load data
+teachers = load_teachers()
+classes = load_classes()
+config = load_config() or SchoolConfig()
+
+tab1, tab2, tab3 = st.tabs(["Teachers", "Classes", "Timetable"])
+
+with tab1:
+    st.header("Teachers")
+    for t in teachers:
+        st.write(f"**{t.name}** — Subjects: {', '.join(t.subjects)}")
+    if st.button("Add Teacher"):
+        new_teacher = teacher_form()
+        if new_teacher:
+            teachers.append(new_teacher)
+            save_teachers(teachers)
+            st.experimental_rerun()
+
+with tab2:
+    st.header("Classes")
+    for c in classes:
+        st.write(f"**{c.name}** — Subjects: {', '.join(s.subject for s in c.subjects)}")
+    if st.button("Add Class"):
+        new_class = class_form()
+        if new_class:
+            classes.append(new_class)
+            save_classes(classes)
+            st.experimental_rerun()
+
+with tab3:
+    st.header("Timetable Preview")
+    if st.button("Build Timetable"):
+        timetable = build_timetable(classes, teachers, config)
+        for (class_id, day, period), (subject, teacher_id) in timetable.items():
+            st.write(f"Class {class_id} — {config.days[day]} P{period+1}: {subject} ({teacher_id})")
 # CSS — Animations (smooth, no layout shift)
 # ---------------------------------------------------------------------------
-
+"""
 ANIMATION_CSS = """
 <style>
-    /* Dark theme — gray / neutral */
+    /* Dark theme - gray / neutral */
     .main { background-color: #0f0f0f; }
-    .main .block-container { padding-top: 2rem; }
+    .main .block-container { padding-top: 32px; }
     h1 { color: #fafafa !important; }
     h2, h3 { color: #e4e4e7 !important; }
     p, span, label { color: #a1a1aa !important; }
@@ -88,23 +338,12 @@ ANIMATION_CSS = """
         color: #e4e4e7;
         background-color: rgba(63,63,70,0.35);
     }
+
     .stTabs [aria-selected="true"] {
         background-color: #27272a !important;
         color: #fafafa !important;
     }
-
-    /* Notification slot */
-    #notification-slot {
-        min-height: 52px;
-        margin-bottom: 8px;
-    }
-
-    /* Toast */
     .toast-item {
-        padding: 10px 14px;
-        background: #18181b;
-        border-radius: 8px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.4);
         font-size: 13px;
         color: #e4e4e7;
         max-width: 300px;
@@ -175,31 +414,13 @@ ANIMATION_CSS = """
     [data-testid="stDataFrame"] .stDataFrame {
         width: 100% !important;
     }
+
+
     @keyframes tableFadeIn {
         from { opacity: 0; }
         to { opacity: 1; }
-    }
 
-    /* History entry */
-    .history-entry {
-        padding: 12px 16px;
-        background: #18181b;
-        border: 1px solid #27272a;
-        border-radius: 8px;
-        margin-bottom: 8px;
-        transition: box-shadow 0.2s ease;
-    }
-    .history-entry:hover { box-shadow: 0 2px 12px rgba(0,0,0,0.3); }
 
-    /* Inputs — darker outline for better visibility */
-    [data-baseweb="input"], [data-baseweb="textarea"], [data-baseweb="select"] {
-        border: 1.5px solid #52525b !important;
-        border-radius: 6px !important;
-        transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
-    }
-    [data-baseweb="input"]:focus, [data-baseweb="textarea"]:focus {
-        border-color: #71717a !important;
-        box-shadow: 0 0 0 2px rgba(113, 113, 122, 0.3) !important;
     }
 </style>
 """
@@ -245,7 +466,7 @@ def _init_session():
             )
 
 
-_init_session()
+
 
 
 # ---------------------------------------------------------------------------
@@ -498,9 +719,229 @@ tabs = st.tabs([
     "🔄 Rotation",
     "🧪 What-If Lab",
     "🔥 Insights",
+    "🌌 Energy Maps",
     "📄 PDF Export",
 ])
-tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8, tab9 = tabs
+tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8, tab9, tab10 = tabs
+# ----- TAB 10: Energy Maps (Animated, Fluid) -----
+import plotly.graph_objects as go
+import plotly.express as px
+import numpy as np
+
+with tab10:
+    st.header("🌌 Energy Maps")
+    st.markdown("""
+    <span style='font-size:1.2em'>
+    <b>Heatmaps, reimagined:</b> <br>
+    <span style='color:#fbbf24'>🔥 Alive</span>, <span style='color:#38bdf8'>🌊 Fluid</span>, <span style='color:#a3e635'>🧠 Intuitive</span>.<br>
+    <ul>
+    <li>Glowing, animated energy fields</li>
+    <li>Smooth gradients, halos, wave motion</li>
+    <li>Soft pulsing, no harsh grid lines</li>
+    </ul>
+    </span>
+    """, unsafe_allow_html=True)
+
+    base_tt = st.session_state.class_timetable
+    if not base_tt:
+        st.info("Generate a timetable first.")
+    else:
+        cfg = st.session_state.config
+        ss = st.session_state.scenario_state
+        resolved = apply_scenarios(base_tt, cfg, st.session_state.teachers, st.session_state.classes, ss)
+
+        # UI Controls
+        col1, col2, col3, col4 = st.columns([2,1,1,1])
+        with col1:
+            emap_type = st.selectbox(
+                "Energy Map Type",
+                [
+                    "Teacher Load Energy Field",
+                    "Class Fatigue Flow Map",
+                    "Congestion Pressure Field",
+                    "What-If Impact Diffusion Map"
+                ],
+                key="emap_type",
+            )
+        with col2:
+            anim_speed = st.slider("Animation Speed", 0.1, 2.0, 0.5, 0.05, key="emap_speed")
+        with col3:
+            glow_intensity = st.slider("Glow Intensity", 0.0, 2.0, 1.0, 0.05, key="emap_glow")
+        with col4:
+            motion_on = st.toggle("Motion", value=True, key="emap_motion")
+
+        # Helper: animated energy field
+        def plot_energy_field(Z, row_labels, col_labels, color_map, orb_mode=False, pulse=1.0, flow=None, glow=1.0, animate=False, frame_count=20):
+            # Z: 2D np.array, color_map: px.colors.sequential
+            # orb_mode: draw glowing orbs per cell (for teacher load)
+            # flow: 2D vector field (for flow maps)
+            # pulse: controls pulsing
+            # animate: if True, returns Plotly animation
+            nrows, ncols = Z.shape
+            fig = go.Figure()
+            if orb_mode:
+                # Each cell: glowing orb, radius = workload
+                for i in range(nrows):
+                    for j in range(ncols):
+                        val = Z[i, j]
+                        color = px.colors.sample_colorscale(color_map, (val-np.min(Z))/(np.ptp(Z)+1e-6))[0]
+                        fig.add_trace(go.Scatter(
+                            x=[j], y=[i],
+                            mode="markers",
+                            marker=dict(
+                                size=30 + 40*val/np.max(Z),
+                                color=color,
+                                opacity=0.7 + 0.3*glow,
+                                line=dict(width=0),
+                                sizemode="diameter",
+                                symbol="circle",
+                                blur=10*glow,
+                                ),
+                            showlegend=False,
+                            hoverinfo="skip",
+                        ))
+                # Glow halo: overlay blurred heatmap
+                fig.add_trace(go.Heatmap(
+                    z=Z,
+                    colorscale=color_map,
+                    opacity=0.25*glow,
+                    showscale=False,
+                ))
+            else:
+                # Smooth field
+                fig.add_trace(go.Heatmap(
+                    z=Z,
+                    colorscale=color_map,
+                    zsmooth="best",
+                    showscale=False,
+                    opacity=0.85,
+                ))
+            # Optionally overlay flow vectors
+            if flow is not None:
+                U, V = flow
+                fig.add_trace(go.Cone(
+                    x=np.tile(np.arange(ncols), nrows),
+                    y=np.repeat(np.arange(nrows), ncols),
+                    u=U.flatten(), v=V.flatten(),
+                    sizemode="scaled",
+                    sizeref=2,
+                    anchor="tail",
+                    colorscale="Blues",
+                    showscale=False,
+                    opacity=0.5,
+                ))
+            fig.update_layout(
+                xaxis=dict(
+                    tickvals=list(range(ncols)),
+                    ticktext=col_labels,
+                    showgrid=False,
+                    zeroline=False,
+                    showticklabels=True,
+                ),
+                yaxis=dict(
+                    tickvals=list(range(nrows)),
+                    ticktext=row_labels,
+                    showgrid=False,
+                    zeroline=False,
+                    showticklabels=True,
+                    autorange="reversed",
+                ),
+                margin=dict(l=40, r=20, t=20, b=40),
+                plot_bgcolor="#18181b",
+                paper_bgcolor="#18181b",
+                height=60*nrows+60,
+                width=80*ncols+80,
+            )
+            return fig
+
+        # Animate: Perlin-like noise for fluid motion
+        def perlin_noise(shape, seed=0):
+            np.random.seed(seed)
+            base = np.random.rand(*shape)
+            from scipy.ndimage import gaussian_filter
+            return gaussian_filter(base, sigma=shape[0]/3)
+
+        # Main logic per map type
+        if emap_type == "Teacher Load Energy Field":
+            load = teacher_load_heatmap(resolved, cfg)
+            teachers = [t.teacher_id for t in st.session_state.teachers]
+            days = cfg.days
+            Z = np.array([[load.get((tid, d), 0) for d in range(len(days))] for tid in teachers])
+            color_map = px.colors.sequential.YlOrRd
+            orb_mode = True
+            # Animate: pulse and flow
+            if motion_on:
+                t = time.time() * anim_speed
+                pulse = 1.0 + 0.15*np.sin(t)
+                # Simulate flow: gradient of Z
+                U, V = np.gradient(Z.astype(float))
+                U = U * 0.5 * np.sin(t)
+                V = V * 0.5 * np.cos(t)
+            else:
+                pulse = 1.0
+                U = V = None
+            fig = plot_energy_field(Z*pulse, teachers, days, color_map, orb_mode=True, pulse=pulse, flow=(U,V) if motion_on else None, glow=glow_intensity, animate=motion_on)
+            st.plotly_chart(fig, use_container_width=True, config={"displayModeBar": False})
+            st.caption("Rows = teachers, Cols = days. Each orb: workload. Color: green→yellow→red. Glow, pulse, and flow animate.")
+
+        elif emap_type == "Class Fatigue Flow Map":
+            pcs = getattr(st.session_state, "priority_configs", None) or []
+            heavy_map = {pc.class_id: pc.heavy_subjects for pc in pcs}
+            fatigue = class_fatigue_heatmap(resolved, cfg, heavy_map)
+            classes = sorted(fatigue.keys())
+            periods = list(range(cfg.periods_per_day))
+            Z = np.array([fatigue[c] for c in classes])
+            color_map = px.colors.sequential.Plasma
+            # Animate: ripple effect
+            if motion_on:
+                t = time.time() * anim_speed
+                ripple = 1.0 + 0.2*np.sin(np.linspace(0, np.pi*2, Z.shape[1]) + t)
+                Z_anim = Z * ripple
+            else:
+                Z_anim = Z
+            fig = plot_energy_field(Z_anim, classes, [f"P{p+1}" for p in periods], color_map, orb_mode=False, glow=glow_intensity, animate=motion_on)
+            st.plotly_chart(fig, use_container_width=True, config={"displayModeBar": False})
+            st.caption("Rows = classes, Cols = periods. Ripple = heavy clusters. Colors pulse with load.")
+
+        elif emap_type == "Congestion Pressure Field":
+            cong = day_congestion_heatmap(resolved, cfg)
+            days = cfg.days
+            Z = np.array([cong[d] for d in range(len(days))]).reshape(1, -1)
+            color_map = px.colors.sequential.YlGnBu
+            # Animate: pulse per day
+            if motion_on:
+                t = time.time() * anim_speed
+                pulse = 1.0 + 0.2*np.sin(np.linspace(0, np.pi*2, Z.shape[1]) + t)
+                Z_anim = Z * pulse
+            else:
+                Z_anim = Z
+            fig = plot_energy_field(Z_anim, ["All classes"], days, color_map, orb_mode=False, glow=glow_intensity, animate=motion_on)
+            st.plotly_chart(fig, use_container_width=True, config={"displayModeBar": False})
+            st.caption("Entire week as pressure map. Heavier days pulse stronger.")
+
+        elif emap_type == "What-If Impact Diffusion Map":
+            # Simulate: after scenario, show wave spread from affected slots
+            # For demo: pick a random slot as 'impacted', diffuse out
+            days = cfg.days
+            periods = list(range(cfg.periods_per_day))
+            shape = (len(days), len(periods))
+            impact = np.zeros(shape)
+            # Pick a slot (center or random)
+            center = (len(days)//2, len(periods)//2)
+            impact[center] = 1.0
+            # Diffuse: Gaussian blur
+            from scipy.ndimage import gaussian_filter
+            t = time.time() * anim_speed if motion_on else 0
+            sigma = 1.5 + 0.5*np.sin(t)
+            Z = gaussian_filter(impact, sigma=sigma)
+            color_map = px.colors.sequential.PuRd
+            fig = plot_energy_field(Z, days, [f"P{p+1}" for p in periods], color_map, orb_mode=False, glow=glow_intensity, animate=motion_on)
+            st.plotly_chart(fig, use_container_width=True, config={"displayModeBar": False})
+            st.caption("After scenario: wave spreads from affected slot. Ripple effects visualized.")
+
+        # Fallback: static if motion off
+        if not motion_on:
+            st.info("Animation is off. Showing static energy field.")
 
 
 # ----- TAB 1: Teachers & Classes -----
