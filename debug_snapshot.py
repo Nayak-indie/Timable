@@ -1,7 +1,7 @@
 """
 debug_snapshot.py
 ------------------
-
+CONSIDER : THIS SCRIPT IS HIGHLY UNDER DEVELOPMENT, DO NOT RESUSCITATE, IT PLAYS NO AMBITION FOR THE PHILOSOPHY OF THE PROJECT(YET).
 Small helper script to dump the current HTML of a running Streamlit app.
 
 Usage (in a separate terminal, after `streamlit run app.py`):
@@ -9,7 +9,7 @@ Usage (in a separate terminal, after `streamlit run app.py`):
     conda activate timable
     python debug_snapshot.py http://localhost:8502 > page.html
 
-Then you (and I) can inspect `page.html` for layout issues.
+Then you (and terminal) can inspect `page.html` for layout issues.
 """
 
 import sys
