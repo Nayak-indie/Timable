@@ -1,3 +1,16 @@
+also, it doesnt not remember anything.. make it remember and store date like i just add it and do my stuff and when i refresh it forgets everything like everythign make it remove no stuff until someone manually does 
+
+
+
+make it display a small ui ux cool looking simple and minimalistic, time and date at top right.
+and save the history according based on that time and date like exact when it happened
+and also create a script that record every client side change with timestamp of time and date like if new element(teacher or class) is added then it records it and it all is stored in a single txt file which is easy to read as well 
+
+
+
+add a new feature, where i can freely and easily edit every input of teachers and class like there would be an edit button beside the preexisting remove button and by clicking on it a small side menu is opened for me to edit and save the changes
+
+also, it doesnt not remember anything.. make it remember and store date like i just add it and do my stuff and when i refresh it forgets everything like everythign make it remove no stuff until someone manually does 
 add a new feature where i can make my own custom scenarios of having custom contstrains
 for example, i want it such that no class will have maths period after lunch break
 so i can add a constrain with predefined guides to help me 
