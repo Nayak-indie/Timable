@@ -1,5 +1,68 @@
 [
   {
+    "ts": "2026-02-16T15:09:38.239690",
+    "action": "generate",
+    "target": "Timetable",
+    "summary": "Generated clash‑free timetable",
+    "details": ""
+  },
+  {
+    "ts": "2026-02-16T14:55:40.131010",
+    "action": "export",
+    "target": "PDF",
+    "summary": "Exported teacher timetables PDF",
+    "details": ""
+  },
+  {
+    "ts": "2026-02-16T14:55:34.061326",
+    "action": "export",
+    "target": "PDF",
+    "summary": "Exported class timetables PDF",
+    "details": ""
+  },
+  {
+    "ts": "2026-02-16T14:55:19.561818",
+    "action": "generate",
+    "target": "Timetable",
+    "summary": "Generated clash‑free timetable",
+    "details": ""
+  },
+  {
+    "ts": "2026-02-16T14:45:36.678797",
+    "action": "generate",
+    "target": "Timetable",
+    "summary": "Generated clash‑free timetable",
+    "details": ""
+  },
+  {
+    "ts": "2026-02-16T14:45:28.358457",
+    "action": "add",
+    "target": "Class 12NM",
+    "summary": "Added class 12NM",
+    "details": ""
+  },
+  {
+    "ts": "2026-02-16T14:45:05.582465",
+    "action": "delete",
+    "target": "Teacher Aisha Khan",
+    "summary": "Removed teacher Aisha Khan",
+    "details": ""
+  },
+  {
+    "ts": "2026-02-16T14:45:01.554427",
+    "action": "delete",
+    "target": "Teacher Neha Verma",
+    "summary": "Removed teacher Neha Verma",
+    "details": ""
+  },
+  {
+    "ts": "2026-02-16T14:41:15.156934",
+    "action": "generate",
+    "target": "Timetable",
+    "summary": "Generated clash‑free timetable",
+    "details": ""
+  },
+  {
     "ts": "2026-02-12T00:54:34.349514",
     "action": "generate",
     "target": "Timetable",

@@ -36,7 +36,12 @@ from reportlab.lib.units import cm
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph, Spacer
 from reportlab.lib.enums import TA_CENTER
 
-from models import SchoolConfig, get_break_name
+from models import SchoolConfig
+
+
+def get_break_name(config: SchoolConfig, period_idx: int) -> str:
+    """Return the display label for a break period."""
+    return config.break_periods.get(period_idx, "Break")
 
 
 def _light_theme_table_style(num_rows: int, num_cols: int) -> TableStyle:
@@ -70,13 +75,16 @@ def export_class_timetables_pdf(
     for class_id in sorted(class_timetables.keys()):
         tt = class_timetables[class_id]
         # Rows = days, Cols = [Day, Period 1, Period 2, ...]
-        period_cols = [f"P{p+1}" + (f" ({get_break_name(config, p)})" if p in config.break_period_indices else "") for p in range(config.periods_per_day)]
+        period_cols = [
+            f"P{p+1}" + (f" ({get_break_name(config, p)})" if p in config.break_periods else "")
+            for p in range(config.periods_per_day)
+        ]
         header = ["Day"] + period_cols
         rows = [header]
         for d in range(len(config.days)):
             row = [config.days[d]]
             for p in range(config.periods_per_day):
-                if p in config.break_period_indices:
+                if p in config.break_periods:
                     row.append(get_break_name(config, p))
                 else:
                     cell = tt.get((d, p), ("", ""))
@@ -110,13 +118,16 @@ def export_teacher_timetables_pdf(
 
     for teacher_id in sorted(teacher_timetables.keys()):
         tt = teacher_timetables[teacher_id]
-        period_cols = [f"P{p+1}" + (f" ({get_break_name(config, p)})" if p in config.break_period_indices else "") for p in range(config.periods_per_day)]
+        period_cols = [
+            f"P{p+1}" + (f" ({get_break_name(config, p)})" if p in config.break_periods else "")
+            for p in range(config.periods_per_day)
+        ]
         header = ["Day"] + period_cols
         rows = [header]
         for d in range(len(config.days)):
             row = [config.days[d]]
             for p in range(config.periods_per_day):
-                if p in config.break_period_indices:
+                if p in config.break_periods:
                     row.append(get_break_name(config, p))
                 else:
                     cell = tt.get((d, p), ("", ""))

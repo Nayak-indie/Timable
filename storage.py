@@ -8,160 +8,13 @@ storage.py — Data persistence for Timable
 """
 import json
 from pathlib import Path
-from typing import List, Optional
-from models import Teacher, Class, SchoolConfig, ClassPriorityConfig, ScenarioState, ClassSubject
-
-DATA_DIR = Path(__file__).parent / "data"
-TEACHERS_FILE = DATA_DIR / "teachers.json"
-CLASSES_FILE = DATA_DIR / "classes.json"
-CONFIG_FILE = DATA_DIR / "config.json"
-PRIORITY_FILE = DATA_DIR / "priority_configs.json"
-SCENARIO_FILE = DATA_DIR / "scenario_state.json"
-
-def _ensure_data_dir() -> None:
-    """Create data directory if it doesn't exist."""
-    DATA_DIR.mkdir(parents=True, exist_ok=True)
-
-def save_teachers(teachers: List[Teacher]) -> None:
-    """Save all teachers to disk. Overwrites existing file."""
-    _ensure_data_dir()
-    data = [_teacher_to_dict(t) for t in teachers]
-    with open(TEACHERS_FILE, "w", encoding="utf-8") as f:
-        json.dump(data, f, indent=2, ensure_ascii=False)
-
-def load_teachers() -> List[Teacher]:
-    """Load all teachers from disk. Returns empty list if file doesn't exist."""
-    _ensure_data_dir()
-    if not TEACHERS_FILE.exists():
-        return []
-    try:
-        with open(TEACHERS_FILE, "r", encoding="utf-8") as f:
-            data = json.load(f)
-        return [_dict_to_teacher(d) for d in data]
-    except (json.JSONDecodeError, KeyError):
-        return []
-
-def save_classes(classes: List[Class]) -> None:
-    """Save all classes to disk. Overwrites existing file."""
-    _ensure_data_dir()
-    data = [_class_to_dict(c) for c in classes]
-    with open(CLASSES_FILE, "w", encoding="utf-8") as f:
-        json.dump(data, f, indent=2, ensure_ascii=False)
-
-def load_classes() -> List[Class]:
-    """Load all classes from disk. Returns empty list if file doesn't exist."""
-    _ensure_data_dir()
-    if not CLASSES_FILE.exists():
-        return []
-    try:
-        with open(CLASSES_FILE, "r", encoding="utf-8") as f:
-            data = json.load(f)
-        return [_dict_to_class(d) for d in data]
-    except (json.JSONDecodeError, KeyError):
-        return []
-
-def save_config(config: SchoolConfig) -> None:
-    """Save school config to disk."""
-    _ensure_data_dir()
-    data = {
-        "days": config.days,
-        "periods_per_day": config.periods_per_day,
-        "break_periods": {str(k): v for k, v in config.break_periods.items()},
-    }
-    with open(CONFIG_FILE, "w", encoding="utf-8") as f:
-        json.dump(data, f, indent=2)
-
-def load_config() -> Optional[SchoolConfig]:
-    """Load school config from disk."""
-    _ensure_data_dir()
-    if not CONFIG_FILE.exists():
-        return SchoolConfig(
-            days=["Mon", "Tue", "Wed", "Thu", "Fri"],
-            periods_per_day=8,
-            break_periods={3: "Lunch"},
-        )
-    try:
-        with open(CONFIG_FILE, "r", encoding="utf-8") as f:
-            d = json.load(f)
-        bp_raw = d.get("break_periods", {"3": "Lunch"})
-        break_periods = {}
-        for k, v in bp_raw.items():
-            try:
-                break_periods[int(k)] = str(v)
-            except (ValueError, TypeError):
-                pass
-        return SchoolConfig(
-            days=d.get("days", ["Mon", "Tue", "Wed", "Thu", "Fri"]),
-            periods_per_day=d.get("periods_per_day", 8),
-            break_periods=break_periods or {3: "Lunch"},
-        )
-    except (json.JSONDecodeError, KeyError):
-        return SchoolConfig(days=["Mon", "Tue", "Wed", "Thu", "Fri"], periods_per_day=8, break_periods={3: "Lunch"})
-
-def save_priority_configs(configs: List[ClassPriorityConfig]) -> None:
-    """Save priority configs to disk."""
-    _ensure_data_dir()
-    data = [
-        {
-            "class_id": p.class_id,
-            "priority_subjects": p.priority_subjects,
-            "weak_subjects": p.weak_subjects,
-            "heavy_subjects": p.heavy_subjects,
-        }
-        for p in configs
-    ]
-    with open(PRIORITY_FILE, "w", encoding="utf-8") as f:
-        json.dump(data, f, indent=2)
-
-def load_priority_configs() -> List[ClassPriorityConfig]:
-    """Load priority configs from disk."""
-    _ensure_data_dir()
-    if not PRIORITY_FILE.exists():
-        return []
-    try:
-        with open(PRIORITY_FILE, "r", encoding="utf-8") as f:
-            data = json.load(f)
-        return [
-            ClassPriorityConfig(
-                class_id=d["class_id"],
-                priority_subjects=d.get("priority_subjects", []),
-                weak_subjects=d.get("weak_subjects", []),
-                heavy_subjects=d.get("heavy_subjects", []),
-            )
-            for d in data
-        ]
-    except (json.JSONDecodeError, KeyError):
-        return []
-
-def save_scenario_state(state: ScenarioState) -> None:
-    """Save scenario state."""
-    _ensure_data_dir()
-    with open(SCENARIO_FILE, "w", encoding="utf-8") as f:
-        json.dump({
-            **state.__dict__,
-            "priority_configs": [c.__dict__ for c in state.priority_configs],
-            "config": state.config.__dict__ if state.config else None
-        }, f, indent=2)
-
-def load_scenario_state() -> Optional[ScenarioState]:
-    """Load what-if scenario state."""
-    _ensure_data_dir()
-    if not SCENARIO_STATE_FILE.exists():
-        return {"selected_day": 0, "scenarios": {}}
-    try:
-        with open(SCENARIO_STATE_FILE, "r", encoding="utf-8") as f:
-            return json.load(f)
-    except (json.JSONDecodeError, KeyError):
-        return {"selected_day": 0, "scenarios": {}}
-
-import json
-from pathlib import Path
-from typing import List, Any, Optional
+from typing import List, Any, Optional, Dict, Tuple
 from datetime import datetime
 
 from models import Teacher, Class, ClassSubject, ClassPriorityConfig, SchoolConfig
 
-
+import json
+from pathlib import Path
 DATA_DIR = Path(__file__).parent / "data"
 TEACHERS_FILE = DATA_DIR / "teachers.json"
 CLASSES_FILE = DATA_DIR / "classes.json"
@@ -171,6 +24,8 @@ HISTORY_FILE = DATA_DIR / "history.json"
 DEMO_LOADED_FILE = DATA_DIR / "demo_loaded.json"
 BASE_TIMETABLE_FILE = DATA_DIR / "base_timetable.json"
 SCENARIO_STATE_FILE = DATA_DIR / "scenario_state.json"
+
+Timetable = Dict[Tuple[str, int, int], Tuple[str, str]]
 
 
 def _ensure_data_dir() -> None:
@@ -385,16 +240,31 @@ def load_base_timetable() -> Optional[dict]:
         return None
     try:
         with open(BASE_TIMETABLE_FILE, "r", encoding="utf-8") as f:
-            return json.load(f)
+            raw = json.load(f)
+        # Deserialize keys of form "class|day|period" back to tuple keys.
+        result: Timetable = {}
+        for k, v in raw.items():
+            try:
+                cid, d_s, p_s = k.split("|")
+                d = int(d_s)
+                p = int(p_s)
+                subj, tid = v
+                result[(cid, d, p)] = (subj, tid)
+            except Exception:
+                continue
+        return result
     except (json.JSONDecodeError, KeyError):
         return None
 
 
-def save_base_timetable(serialized: dict) -> None:
-    """Save base timetable."""
+def save_base_timetable(timetable: Timetable) -> None:
+    """Save base timetable (convert tuple keys to JSON-serializable dict)."""
     _ensure_data_dir()
+    raw: Dict[str, Any] = {}
+    for (cid, d, p), (subj, tid) in timetable.items():
+        raw[f"{cid}|{d}|{p}"] = [subj, tid]
     with open(BASE_TIMETABLE_FILE, "w", encoding="utf-8") as f:
-        json.dump(serialized, f, indent=2)
+        json.dump(raw, f, indent=2)
 
 
 def load_scenario_state() -> dict:
