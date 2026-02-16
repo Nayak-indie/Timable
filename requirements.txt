@@ -4,7 +4,7 @@ streamlit>=1.54.0
 
 # Solver & maths
 ortools>=9.8.0
-numpy>=2.4.0
+numpy>=2.2.0
 scipy>=1.10.0
 
 # Data handling
