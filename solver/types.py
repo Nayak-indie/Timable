@@ -40,16 +40,19 @@ class SolverContext:
     def __post_init__(self):
         self.num_days = len(self.config.days)
         self.num_periods = self.config.periods_per_day
-        self.breaks = set(self.config.break_period_indices)
-        self.class_ids = [c.class_id for c in self.classes]
+        # Derive break indices directly from config.break_periods to avoid
+        # depending on extra helper properties.
+        self.breaks = set(self.config.break_periods.keys())
+        self.class_ids = [getattr(c, "class_id", getattr(c, "id")) for c in self.classes]
         self.teacher_ids = [t.teacher_id for t in self.teachers]
 
         available_periods_per_day = max(0, self.num_periods - len(self.breaks))
 
         # Build class_subject_info
         for c in self.classes:
+            cid = getattr(c, "class_id", getattr(c, "id"))
             for cs in c.subjects:
-                self.class_subject_info[(c.class_id, cs.subject)] = (
+                self.class_subject_info[(cid, cs.subject)] = (
                     cs.weekly_periods,
                     cs.teacher_id,
                 )

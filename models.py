@@ -12,6 +12,9 @@ class Teacher:
     subjects: List[str] = field(default_factory=list)
     max_periods_per_day: int = 6
     max_periods_per_week: int = 30
+    # Desired minimum number of free periods per day. This is a UX hint;
+    # solver uses max_periods_per_day = periods_per_day - target_free_periods_per_day.
+    target_free_periods_per_day: int = 0
 
 @dataclass
 class ClassSubject:

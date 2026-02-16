@@ -1,0 +1,11 @@
+add a new feature where i can make my own custom scenarios of having custom contstrains
+for example, i want it such that no class will have maths period after lunch break
+so i can add a constrain with predefined guides to help me 
+and also hints to do it nicely
+add a feature for each input element that is of teachers and student that it can mbe edited... presently it can only be removed but make it such that it can be edited as well without any errors
+
+
+
+make a new type of framework such that the app.py runs in terminal but that erminal is seprately run like i want this app to be used using console too
+but that console must be synced with web app like if i do some changes or load some custom data during the time i open web app then the same information log and things should be saved by terminal as well.
+like list each feature and each feature of the web app should be made possible to the terminal aswell and each action and possibility too and the terminal should require less experience like should be very user friendly customizable and must generate correct stuff and things and output is gonan be plane text so it better be color and prepare a whole freaking manual to use the terminal in a seperate pdf file and also pave a way for future users to edit things like make it super user friendly to apply logics like user can easily from the terminal ask it to apply logic such that there is no science period as the last one.. just by typing few commands in the terminal
