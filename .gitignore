@@ -12,7 +12,7 @@ venv/
 .timable/
 *.env
 
-# Ignore your personal storage file
+
 storing.txt
 
 # Ignore system files
