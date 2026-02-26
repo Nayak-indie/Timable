@@ -7,7 +7,6 @@ from ortools.sat.python import cp_model
 from models import Class, ClassPriorityConfig, SchoolConfig, Teacher
 from solver.constraints import create_default_registry
 from solver.constraints.registry import ConstraintRegistry
-from solver.scoring import compute_timetable_score
 from solver.types import SolverContext
 
 
@@ -68,56 +67,29 @@ def _add_optimization_objective(
 ) -> None:
     """
     Add soft constraints to optimize timetable quality based on priority configs.
-    
-    Maximizes:
-    - Priority subjects in early periods (periods 0, 1, 2)
-    Minimizes:
-    - Back-to-back heavy subjects
-    - Gaps in teacher's daily schedule (spread evenly)
     """
     priority_map = {pc.class_id: pc for pc in priority_configs}
     breaks = context.breaks
     
-    # Score variables
     score = 0
     
-    # Bonus: priority subjects in early periods (periods 0, 1, 2)
+    # Bonus: priority subjects in early periods
     for (cid, subj, d, p), var in context.assign.items():
         if p not in breaks:
             pc = priority_map.get(cid)
             if pc and subj in pc.priority_subjects:
-                # Higher bonus for earlier periods
                 early_bonus = max(0, 3 - p)
                 score += early_bonus * var
     
-    # Penalty: back-to-back heavy subjects (for each class)
+    # Penalty: back-to-back heavy subjects
     for (cid, subj, d, p), var in context.assign.items():
         if p not in breaks and p + 1 not in breaks:
             pc = priority_map.get(cid)
             if pc and subj in pc.heavy_subjects:
-                # Look at next period in same day
                 next_var = context.assign.get((cid, subj, d, p + 1))
                 if next_var is not None:
-                    # Penalty for consecutive heavy subjects
                     score -= 2 * var * next_var
     
-    # Penalty: gaps in teacher schedules (prefer contiguous blocks)
-    for t in context.teachers:
-        for d in range(context.num_days):
-            teacher_vars = [
-                context.assign[(cid, subj, d, p)]
-                for (cid, subj), (_, tid) in context.class_subject_info.items()
-                if tid == t.teacher_id
-                for p in range(context.num_periods)
-                if p not in breaks
-            ]
-            # Count gaps between assigned periods
-            for i in range(len(teacher_vars) - 1):
-                gap_penalty = teacher_vars[i] - teacher_vars[i + 1]
-                # This is complex to model, so we simplify:
-                # Just minimize the sum of gaps indirectly through other objectives
-    
-    # Set objective: maximize score
     model.Maximize(score)
 
 
@@ -125,10 +97,7 @@ def invert_to_teacher_timetable(
     class_timetable: Dict[Tuple[str, int, int], Tuple[str, str]],
     config: SchoolConfig,
 ) -> Dict[str, Dict[Tuple[int, int], Tuple[str, str]]]:
-    """
-    Inverts the class timetable: for each teacher, list their
-    (day, period) -> (class_id, subject).
-    """
+    """Inverts the class timetable: for each teacher, list their (day, period) -> (class_id, subject)."""
     teacher_schedules: Dict[str, Dict[Tuple[int, int], Tuple[str, str]]] = {}
     for (cid, d, p), (subj, tid) in class_timetable.items():
         if tid not in teacher_schedules:
