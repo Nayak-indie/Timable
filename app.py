@@ -13,6 +13,9 @@ import copy
 from datetime import timedelta
 from typing import Dict, List, Tuple
 
+import activity_logger as logger
+from activity_logger import Activities
+
 import numpy as np
 import pandas as pd
 import streamlit as st
@@ -34,12 +37,16 @@ from storage import (
     clear_scenario_state,
     is_demo_loaded,
     load_base_timetable,
+    load_classes,
     load_config,
     load_history,
     load_scenario_state,
+    load_teachers,
     save_base_timetable,
+    save_classes,
     save_config,
     save_scenario_state,
+    save_teachers,
     set_demo_loaded,
 )
 
@@ -199,8 +206,9 @@ def _init_session() -> None:
     if "initialized" in st.session_state:
         return
 
-    st.session_state.teachers: List[Teacher] = []
-    st.session_state.classes: List[Class] = []
+    # Load from storage first
+    st.session_state.teachers: List[Teacher] = load_teachers()
+    st.session_state.classes: List[Class] = load_classes()
     st.session_state.priority_configs: List[ClassPriorityConfig] = []
     st.session_state.config: SchoolConfig = load_config()
 
@@ -382,7 +390,10 @@ def load_demo_into_session() -> None:
         ),
     ]
 
+    save_teachers(st.session_state.teachers)
+    save_classes(st.session_state.classes)
     show_toast("Demo data loaded (teachers + classes)")
+    logger.log_activity(Activities.DEMO_LOADED, "Demo data loaded with sample teachers and classes", "system")
     set_demo_loaded()
 
 
@@ -434,6 +445,7 @@ def render_sidebar() -> None:
                 break_periods=breaks or cfg.break_periods,
             )
             save_config(st.session_state.config)
+            logger.log_activity(Activities.CONFIG_UPDATED, f"Updated: {days} days, {periods} periods/day, {len(breaks)} breaks", "system")
             show_toast("Config saved")
 
     st.sidebar.markdown("---")
@@ -448,6 +460,7 @@ def render_sidebar() -> None:
         clear_base_timetable()
         clear_scenario_state()
         clear_demo_loaded()
+        logger.log_activity(Activities.DATA_CLEARED, "Cleared all timetables and demo data", "system")
         show_toast("Cleared generated timetables")
 
 
@@ -471,32 +484,53 @@ def tab_teachers_classes() -> None:
             subs = st.text_input(
                 "Subjects (comma-separated)", key="new_teacher_subjects"
             )
-        free_per_day = st.number_input(
-            "Free periods per day",
-            min_value=0,
-            max_value=cfg.periods_per_day,
-            value=max(0, cfg.periods_per_day - 6),
-            key="new_teacher_free_per_day",
-        )
-        max_day = max(cfg.periods_per_day - int(free_per_day), 0)
-        st.caption(f"Teacher will teach at most {max_day} periods/day.")
+        
+        col_m1, col_m2, col_m3 = st.columns(3)
+        with col_m1:
+            max_per_day = st.number_input(
+                "Max periods/day",
+                min_value=0,
+                max_value=12,
+                value=6,
+                key="new_teacher_max_day",
+            )
+        with col_m2:
+            max_per_week = st.number_input(
+                "Max periods/week",
+                min_value=0,
+                max_value=40,
+                value=30,
+                key="new_teacher_max_week",
+            )
+        with col_m3:
+            free_per_day = st.number_input(
+                "Free periods/day",
+                min_value=0,
+                max_value=12,
+                value=max(0, cfg.periods_per_day - max_per_day),
+                key="new_teacher_free_per_day",
+            )
+        
+        st.caption(f"Teacher will teach at most {max_per_day} periods/day ({max_per_week}/week).")
         if st.button("Save Teacher", key="save_teacher_btn"):
             if t_id.strip():
                 teacher = Teacher(
                     teacher_id=t_id.strip(),
                     name=t_id.strip(),
                     subjects=[s.strip() for s in subs.split(",") if s.strip()],
-                    max_periods_per_day=int(max_day),
-                    max_periods_per_week=30,
+                    max_periods_per_day=int(max_per_day),
+                    max_periods_per_week=int(max_per_week),
                     target_free_periods_per_day=int(free_per_day),
                 )
                 st.session_state.teachers.append(teacher)
+                save_teachers(st.session_state.teachers)
                 show_toast(f"Teacher {t_id} added")
+                logger.log_activity(Activities.TEACHER_ADDED, f"Teacher '{t_id}' with subjects: {subs}", "teacher")
                 append_history("add", f"Teacher {t_id}", f"Added teacher {t_id}")
 
     if st.session_state.teachers:
         for i, t in enumerate(st.session_state.teachers):
-            cols = st.columns([4, 1])
+            cols = st.columns([4, 1, 1])
             with cols[0]:
                 subjects = ", ".join(t.subjects) if isinstance(t.subjects, list) else str(
                     t.subjects
@@ -506,9 +540,44 @@ def tab_teachers_classes() -> None:
                     f"(max {t.max_periods_per_day}/day)"
                 )
             with cols[1]:
-                if st.button("Remove", key=f"rm_teacher_{i}"):
+                if st.button("✏️ Edit", key=f"edit_teacher_{i}"):
+                    st.session_state[f"editing_teacher_{i}"] = True
+                    
+                # Handle edit mode
+                if st.session_state.get(f"editing_teacher_{i}", False):
+                    with st.expander(f"Editing: {t.teacher_id}", expanded=True):
+                        new_name = st.text_input("Name / ID", value=t.teacher_id, key=f"edit_name_{i}")
+                        new_subjects = st.text_input("Subjects (comma-separated)", value=", ".join(t.subjects), key=f"edit_subj_{i}")
+                        col_m1, col_m2 = st.columns(2)
+                        with col_m1:
+                            new_max_day = st.number_input("Max periods/day", min_value=0, max_value=12, value=t.max_periods_per_day, key=f"edit_max_{i}")
+                        with col_m2:
+                            new_target_free = st.number_input("Free periods/day", min_value=0, max_value=12, value=getattr(t, 'target_free_periods_per_day', 0), key=f"edit_free_{i}")
+                        
+                        col_e1, col_e2 = st.columns(2)
+                        with col_e1:
+                            if st.button("💾 Save", key=f"save_teacher_{i}"):
+                                old_name = t.teacher_id
+                                t.teacher_id = new_name.strip()
+                                t.name = new_name.strip()
+                                t.subjects = [s.strip() for s in new_subjects.split(",") if s.strip()]
+                                t.max_periods_per_day = int(new_max_day)
+                                t.target_free_periods_per_day = int(new_target_free)
+                                save_teachers(st.session_state.teachers)
+                                show_toast(f"Teacher '{new_name}' updated!")
+                                logger.log_activity(Activities.TEACHER_UPDATED, f"Teacher '{old_name}' updated to '{new_name}'", "teacher")
+                                st.session_state[f"editing_teacher_{i}"] = False
+                                st.rerun()
+                        with col_e2:
+                            if st.button("Cancel", key=f"cancel_teacher_{i}"):
+                                st.session_state[f"editing_teacher_{i}"] = False
+                                st.rerun()
+            with cols[2]:
+                if st.button("🗑️", key=f"rm_teacher_{i}"):
                     removed = st.session_state.teachers.pop(i)
+                    save_teachers(st.session_state.teachers)
                     show_toast(f"Teacher {removed.teacher_id} removed")
+                    logger.log_activity(Activities.TEACHER_REMOVED, f"Teacher '{removed.teacher_id}' removed", "teacher")
                     append_history(
                         "delete",
                         f"Teacher {removed.teacher_id}",
@@ -547,7 +616,9 @@ def tab_teachers_classes() -> None:
                 st.session_state.classes.append(
                     Class(id=cid.strip(), name=cid.strip(), subjects=subjects)
                 )
+                save_classes(st.session_state.classes)
                 show_toast(f"Class {cid} added")
+                logger.log_activity(Activities.CLASS_ADDED, f"Class '{cid}' with {len(subjects)} subjects", "class")
                 append_history("add", f"Class {cid}", f"Added class {cid}")
 
     if st.session_state.classes:
@@ -556,13 +627,59 @@ def tab_teachers_classes() -> None:
                 f"{cs.subject}({cs.weekly_periods}w → {cs.teacher_id})"
                 for cs in c.subjects
             ) or "No subjects yet"
-            cols = st.columns([4, 1])
+            cols = st.columns([4, 1, 1])
             with cols[0]:
                 st.markdown(f"**{c.id}** — {subj_str}")
             with cols[1]:
-                if st.button("Remove", key=f"rm_class_{i}"):
+                if st.button("✏️ Edit", key=f"edit_class_btn_{i}"):
+                    st.session_state[f"editing_class_{i}"] = True
+                    
+                # Handle edit mode
+                if st.session_state.get(f"editing_class_{i}", False):
+                    with st.expander(f"Editing: {c.id}", expanded=True):
+                        new_id = st.text_input("Class ID", value=c.id, key=f"edit_class_id_{i}")
+                        st.markdown("**Subjects (one per line: subject,periods,teacher)**")
+                        subj_lines_edit = "\n".join(
+                            f"{cs.subject},{cs.weekly_periods},{cs.teacher_id}"
+                            for cs in c.subjects
+                        )
+                        new_subj_lines = st.text_area("Subjects", value=subj_lines_edit, key=f"edit_class_subj_{i}", height=150)
+                        
+                        col_e1, col_e2 = st.columns(2)
+                        with col_e1:
+                            if st.button("💾 Save", key=f"save_class_{i}"):
+                                old_id = c.id
+                                c.id = new_id.strip()
+                                c.name = new_id.strip()
+                                # Parse subjects
+                                new_subjects = []
+                                for line in new_subj_lines.splitlines():
+                                    parts = [p.strip() for p in line.split(",")]
+                                    if len(parts) >= 3:
+                                        try:
+                                            new_subjects.append(ClassSubject(
+                                                subject=parts[0],
+                                                weekly_periods=int(parts[1]),
+                                                teacher_id=parts[2]
+                                            ))
+                                        except ValueError:
+                                            continue
+                                c.subjects = new_subjects
+                                save_classes(st.session_state.classes)
+                                show_toast(f"Class '{new_id}' updated!")
+                                logger.log_activity(Activities.CLASS_UPDATED, f"Class '{old_id}' updated to '{new_id}'", "class")
+                                st.session_state[f"editing_class_{i}"] = False
+                                st.rerun()
+                        with col_e2:
+                            if st.button("Cancel", key=f"cancel_class_{i}"):
+                                st.session_state[f"editing_class_{i}"] = False
+                                st.rerun()
+            with cols[2]:
+                if st.button("🗑️", key=f"rm_class_{i}"):
                     removed = st.session_state.classes.pop(i)
+                    save_classes(st.session_state.classes)
                     show_toast(f"Class {removed.id} removed")
+                    logger.log_activity(Activities.CLASS_REMOVED, f"Class '{removed.id}' removed", "class")
                     append_history(
                         "delete",
                         f"Class {removed.id}",
@@ -609,12 +726,14 @@ def tab_class_timetables() -> None:
         if tt is None:
             st.error("No solution found. Try changing config or weekly periods.")
             append_history("generate", "Timetable", "No solution found")
+            logger.log_activity(Activities.TIMETABLE_GENERATED, "Failed: No solution found", "timetable")
             return
 
         st.session_state.class_timetable = tt
         st.session_state.teacher_timetable = invert_to_teacher_timetable(tt, cfg)
         save_base_timetable(tt)
         append_history("generate", "Timetable", "Generated clash‑free timetable")
+        logger.log_activity(Activities.TIMETABLE_GENERATED, f"Generated timetable for {len(st.session_state.classes)} classes and {len(st.session_state.teachers)} teachers", "timetable")
         show_toast("Timetable generated!")
 
     if not st.session_state.class_timetable:
@@ -692,6 +811,182 @@ def tab_teacher_timetables() -> None:
             width="stretch",
             hide_index=True,
         )
+
+
+def tab_substitution() -> None:
+    """Smart Substitution - Find best substitute for absent teacher."""
+    st.header("🔄 Smart Substitution")
+    st.markdown("*Find the best substitute teacher instantly*")
+    
+    cfg = st.session_state.config
+    
+    if not st.session_state.class_timetable:
+        st.info("Please generate a timetable first!")
+        return
+    
+    col1, col2 = st.columns(2)
+    with col1:
+        absent_day = st.selectbox("Select Day", cfg.days, key="absent_day")
+    with col2:
+        absent_period = st.selectbox("Select Period", [f"P{i+1}" for i in range(cfg.periods_per_day)], key="absent_period")
+    
+    if st.button("🔍 Find Substitute", type="primary"):
+        day_idx = cfg.days.index(absent_day)
+        period_idx = int(absent_period.replace("P", "")) - 1
+        
+        # Get the class and subject at this slot
+        classes_at_slot = []
+        for (cid, d, p), (subj, tid) in st.session_state.class_timetable.items():
+            if d == day_idx and p == period_idx:
+                classes_at_slot.append((cid, subj, tid))
+        
+        if not classes_at_slot:
+            st.success("All classes have free period!")
+            return
+        
+        # Find substitutes
+        st.subheader("📋 Substitution Plan")
+        for cid, subj, original_teacher in classes_at_slot:
+            # Find teachers who can teach this subject and are free
+            potential_subs = []
+            for t in st.session_state.teachers:
+                if subj in t.subjects and t.teacher_id != original_teacher:
+                    # Check if teacher is free at this time
+                    is_free = True
+                    for (c2, d2, p2), (s2, t2) in st.session_state.class_timetable.items():
+                        if d2 == day_idx and p2 == period_idx and t2 == t.teacher_id:
+                            is_free = False
+                            break
+                    if is_free:
+                        potential_subs.append(t.teacher_id)
+            
+            with st.expander(f"**{cid}**: {subj} ({original_teacher})", expanded=True):
+                if potential_subs:
+                    st.success(f"✅ Available substitutes: {', '.join(potential_subs)}")
+                else:
+                    st.warning("⚠️ No substitute available for this subject!")
+
+def tab_free_teacher() -> None:
+    """Free Teacher Finder - Instantly find free teachers."""
+    st.header("👨‍🏫 Free Teacher Finder")
+    st.markdown("*Find available teachers for any period*")
+    
+    cfg = st.session_state.config
+    
+    if not st.session_state.class_timetable:
+        st.info("Please generate a timetable first!")
+        return
+    
+    col1, col2 = st.columns(2)
+    with col1:
+        free_day = st.selectbox("Select Day", cfg.days, key="free_day")
+    with col2:
+        free_period = st.selectbox("Select Period", [f"P{i+1}" for i in range(cfg.periods_per_day)], key="free_period")
+    
+    day_idx = cfg.days.index(free_day)
+    period_idx = int(free_period.replace("P", "")) - 1
+    
+    # Skip if break
+    if period_idx in cfg.break_periods:
+        st.warning(f"Period {period_idx + 1} is a break: {cfg.break_periods[period_idx]}")
+        return
+    
+    # Find all teachers teaching at this time
+    busy_teachers = set()
+    for (cid, d, p), (subj, tid) in st.session_state.class_timetable.items():
+        if d == day_idx and p == period_idx:
+            busy_teachers.add(tid)
+    
+    # Find free teachers
+    all_teachers = set(t.teacher_id for t in st.session_state.teachers)
+    free_teachers = all_teachers - busy_teachers
+    
+    st.subheader(f"📅 {free_day} - {free_period}")
+    
+    if free_teachers:
+        st.success(f"**{len(free_teachers)} teachers available:**")
+        for t in sorted(free_teachers):
+            teacher = next((x for x in st.session_state.teachers if x.teacher_id == t), None)
+            if teacher:
+                st.markdown(f"• **{t}** - Subjects: {', '.join(teacher.subjects)}")
+    else:
+        st.warning("⚠️ All teachers are busy during this period!")
+
+def tab_load_analyzer() -> None:
+    """Teacher Load Analyzer - Show workload analysis."""
+    st.header("📊 Teacher Load Analyzer")
+    st.markdown("*Automatic load balancing analysis for teachers*")
+    
+    if not st.session_state.class_timetable:
+        st.info("Please generate a timetable first!")
+        return
+    
+    cfg = st.session_state.config
+    
+    # Calculate load per teacher
+    teacher_load = {}
+    for t in st.session_state.teachers:
+        teacher_load[t.teacher_id] = {
+            'total': 0,
+            'daily': {d: 0 for d in cfg.days},
+            'subjects': {}
+        }
+    
+    for (cid, d, p), (subj, tid) in st.session_state.class_timetable.items():
+        if p not in cfg.break_periods and tid in teacher_load:
+            teacher_load[tid]['total'] += 1
+            teacher_load[tid]['daily'][cfg.days[d]] += 1
+            teacher_load[tid]['subjects'][subj] = teacher_load[tid]['subjects'].get(subj, 0) + 1
+    
+    # Display load
+    st.subheader("📈 Weekly Workload")
+    
+    # Create load data
+    load_data = []
+    for tid, data in teacher_load.items():
+        teacher = next((t for t in st.session_state.teachers if t.teacher_id == tid), None)
+        max_allowed = teacher.max_periods_per_week if teacher else 30
+        load_pct = (data['total'] / max_allowed * 100) if max_allowed > 0 else 0
+        
+        status = "✅" if data['total'] <= max_allowed else "⚠️"
+        
+        load_data.append({
+            "Teacher": tid,
+            "Total Periods": data['total'],
+            "Max Allowed": max_allowed,
+            "Utilization %": f"{load_pct:.0f}%",
+            "Status": status
+        })
+    
+    if load_data:
+        st.dataframe(load_data, use_container_width=True)
+    
+    # Daily distribution
+    st.subheader("📅 Daily Distribution")
+    daily_data = []
+    for tid, data in teacher_load.items():
+        row = {"Teacher": tid}
+        for d in cfg.days:
+            row[d] = data['daily'].get(d, 0)
+        row["Total"] = data['total']
+        daily_data.append(row)
+    
+    if daily_data:
+        st.dataframe(daily_data, use_container_width=True)
+    
+    # Overload warnings
+    st.subheader("⚠️ Overload Alerts")
+    overloads = []
+    for tid, data in teacher_load.items():
+        teacher = next((t for t in st.session_state.teachers if t.teacher_id == tid), None)
+        if teacher and data['total'] > teacher.max_periods_per_week:
+            overloads.append(f"**{tid}**: {data['total']}/{teacher.max_periods_per_week} periods (exceeded by {data['total'] - teacher.max_periods_per_week})")
+    
+    if overloads:
+        for alert in overloads:
+            st.warning(alert)
+    else:
+        st.success("✅ All teachers are within their workload limits!")
 
 
 def tab_heatmaps() -> None:
@@ -786,6 +1081,7 @@ def tab_pdf_export() -> None:
             key="dl_all_classes_pdf",
         ):
             append_history("export", "PDF", "Exported all class timetables PDF")
+            logger.log_activity(Activities.TIMETABLE_EXPORTED, "Exported PDF for all classes", "timetable")
             show_toast("All class PDFs downloaded")
     with col2:
         if st.download_button(
@@ -796,6 +1092,7 @@ def tab_pdf_export() -> None:
             key="dl_all_teachers_pdf",
         ):
             append_history("export", "PDF", "Exported all teacher timetables PDF")
+            logger.log_activity(Activities.TIMETABLE_EXPORTED, "Exported PDF for all teachers", "timetable")
             show_toast("All teacher PDFs downloaded")
 
     st.markdown("---")
@@ -845,19 +1142,54 @@ def tab_pdf_export() -> None:
 
 def main() -> None:
     _init_session()
-    render_sidebar()
 
-    st.title("📅 Smart Timetable Builder")
-    st.markdown("*Smooth, stable, alive.*")
+    # Custom header with datetime
+    from datetime import datetime
+    import pytz
+    
+    # Set timezone to IST (India Standard Time)
+    ist = pytz.timezone('Asia/Kolkata')
+    now = datetime.now(ist)
+    date_str = now.strftime("%a, %d %b %Y")
+    time_str = now.strftime("%I:%M %p")
+    
+    # Hide default header
+    hide_menu_style = """
+        <style>
+        #MainMenu {visibility: hidden;}
+        header {visibility: hidden;}
+        .block-container {padding-top: 1rem !important;}
+        </style>
+    """
+    st.markdown(hide_menu_style, unsafe_allow_html=True)
+    
+    # Custom top bar
+    st.markdown(f"""
+    <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 20px; background: linear-gradient(90deg, #1a1a2e 0%, #16213e 100%); border-radius: 12px; margin-bottom: 20px; border: 1px solid #2d2d44;">
+        <div style="display: flex; align-items: center; gap: 12px;">
+            <span style="font-size: 28px;">📅</span>
+            <span style="font-size: 20px; font-weight: 600; color: #fff;">Timetable</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 20px;">
+            <span style="color: #888; font-size: 14px;">{date_str}</span>
+            <span style="color: #00d4ff; font-size: 18px; font-weight: 600; font-family: monospace;">{time_str}</span>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+    render_sidebar()
 
     _notification_ticker()
 
-    tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs(
+    tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8, tab9 = st.tabs(
         [
             "👥 Teachers & Classes",
             "🕓 History",
             "📋 Class Timetables",
             "👨‍🏫 Teacher Timetables",
+            "🔄 Substitution",
+            "👨‍🏫 Free Teachers",
+            "📊 Load Analyzer",
             "🔥 Heatmaps",
             "📄 PDF Export",
         ]
@@ -872,8 +1204,14 @@ def main() -> None:
     with tab4:
         tab_teacher_timetables()
     with tab5:
-        tab_heatmaps()
+        tab_substitution()
     with tab6:
+        tab_free_teacher()
+    with tab7:
+        tab_load_analyzer()
+    with tab8:
+        tab_heatmaps()
+    with tab9:
         tab_pdf_export()
 
 

@@ -9,7 +9,6 @@
   "periods_per_day": 9,
   "break_periods": {
     "4": "Lunch",
-    "8": "Special event",
     "1": "Fruit Break"
   }
 }

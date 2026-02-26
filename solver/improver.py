@@ -77,8 +77,9 @@ def improve_timetable(
     """Try swaps to improve score. Keep best."""
     class_subject_info = {}
     for c in classes:
+        cid = getattr(c, 'class_id', getattr(c, 'id', ''))
         for cs in c.subjects:
-            class_subject_info[(c.class_id, cs.subject)] = (
+            class_subject_info[(cid, cs.subject)] = (
                 cs.weekly_periods,
                 cs.teacher_id,
             )
