@@ -49,7 +49,7 @@ class SolverContext:
         # Derive break indices directly from config.break_periods to avoid
         # depending on extra helper properties.
         self.breaks = set(self.config.break_periods.keys())
-        self.class_ids = [getattr(c, "class_id", getattr(c, "id", "")) for c in self.classes]
+        self.class_ids = [getattr(c, "class_id", getattr(c, "id")) for c in self.classes]
         self.teacher_ids = [t.teacher_id for t in self.teachers]
 
         available_periods_per_day = max(0, self.num_periods - len(self.breaks))
@@ -83,10 +83,9 @@ class SolverContext:
             required_daily = (
                 math.ceil(weekly_load / self.num_days) if self.num_days else 0
             )
-            # Use min: don't allocate more slots than the teacher needs
-            # This prevents wasting solver search space on impossible assignments
+            # Use min: don't allocate more slots than teacher needs
             relaxed_cap = min(t.max_periods_per_day, required_daily)
-            # Ensure at least the required daily load is possible
+            # Ensure at least required daily load is possible
             relaxed_cap = max(relaxed_cap, required_daily)
             if available_periods_per_day:
                 relaxed_cap = min(relaxed_cap, available_periods_per_day)
