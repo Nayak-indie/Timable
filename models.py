@@ -7,13 +7,12 @@ from typing import List, Dict, Optional
 
 @dataclass
 class Teacher:
-    teacher_id: str  # We use teacher_id to match your storage.py
+    teacher_id: str
     name: str
     subjects: List[str] = field(default_factory=list)
+    sections: List[str] = field(default_factory=list)
     max_periods_per_day: int = 6
     max_periods_per_week: int = 30
-    # Desired minimum number of free periods per day. This is a UX hint;
-    # solver uses max_periods_per_day = periods_per_day - target_free_periods_per_day.
     target_free_periods_per_day: int = 0
 
 @dataclass
@@ -37,7 +36,9 @@ class SchoolConfig:
 @dataclass
 class ClassPriorityConfig:
     class_id: str
-    subject_priority: Dict[str, int]  # subject -> priority (higher = more important)
+    priority_subjects: List[str] = field(default_factory=list)
+    weak_subjects: List[str] = field(default_factory=list)
+    heavy_subjects: List[str] = field(default_factory=list)
 
 @dataclass
 class ScenarioState:

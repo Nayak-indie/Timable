@@ -2,11 +2,14 @@
 
 import math
 from dataclasses import dataclass, field
-from typing import Dict, List, Set, Tuple
+from typing import TYPE_CHECKING, Dict, List, Set, Tuple
 
 from ortools.sat.python import cp_model
 
 from models import Class, SchoolConfig, Teacher
+
+if TYPE_CHECKING:
+    from models import ClassPriorityConfig
 
 
 @dataclass
@@ -36,6 +39,9 @@ class SolverContext:
 
     # teacher_id -> effective daily limit (auto-relaxed)
     effective_teacher_limits: Dict[str, int] = field(default_factory=dict)
+    
+    # Priority configurations for optimization
+    priority_configs: List["ClassPriorityConfig"] = field(default_factory=list)
 
     def __post_init__(self):
         self.num_days = len(self.config.days)
@@ -77,7 +83,10 @@ class SolverContext:
             required_daily = (
                 math.ceil(weekly_load / self.num_days) if self.num_days else 0
             )
-            relaxed_cap = max(t.max_periods_per_day, required_daily)
+            # Use min: don't allocate more slots than teacher needs
+            relaxed_cap = min(t.max_periods_per_day, required_daily)
+            # Ensure at least required daily load is possible
+            relaxed_cap = max(relaxed_cap, required_daily)
             if available_periods_per_day:
                 relaxed_cap = min(relaxed_cap, available_periods_per_day)
             self.effective_teacher_limits[t.teacher_id] = relaxed_cap
