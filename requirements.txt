@@ -1,19 +1,9 @@
-# Smart Timetable Builder — dependencies
-# Core app & UI
-streamlit>=1.54.0
-
-# Solver & maths
-ortools>=9.8.0
-numpy>=2.2.0
+streamlit>=1.28.0
+ortools>=9.5.0
+numpy>=1.23.0
+pandas>=1.5.0
 scipy>=1.10.0
-
-# Data handling
-pandas>=2.3.0
-python-dateutil>=2.9.0
-
-# Visualization
 plotly>=5.14.0
 matplotlib>=3.7.0
-
-# PDF export
-reportlab>=4.4.0
+reportlab>=4.0.0
+python-dateutil>=2.8.0
