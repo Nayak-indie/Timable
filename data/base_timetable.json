@@ -1,9 +1,5 @@
 {
-  "11SCI|0|0": [
-    "Physics",
-    "Eric Simon"
-  ],
-  "11SCI|0|7": [
+  "11SCI|0|2": [
     "Physics",
     "Eric Simon"
   ],
@@ -15,89 +11,89 @@
     "Physics",
     "Eric Simon"
   ],
-  "11SCI|3|0": [
-    "Physics",
-    "Eric Simon"
-  ],
   "11SCI|3|2": [
     "Physics",
     "Eric Simon"
   ],
-  "11SCI|1|3": [
+  "11SCI|3|5": [
+    "Physics",
+    "Eric Simon"
+  ],
+  "11SCI|4|3": [
+    "Physics",
+    "Eric Simon"
+  ],
+  "11SCI|0|3": [
+    "Chemistry",
+    "Aisha Khan"
+  ],
+  "11SCI|0|6": [
+    "Chemistry",
+    "Aisha Khan"
+  ],
+  "11SCI|0|8": [
+    "Chemistry",
+    "Aisha Khan"
+  ],
+  "11SCI|2|0": [
+    "Chemistry",
+    "Aisha Khan"
+  ],
+  "11SCI|3|6": [
+    "Chemistry",
+    "Aisha Khan"
+  ],
+  "11SCI|3|8": [
     "Chemistry",
     "Aisha Khan"
   ],
   "11SCI|1|5": [
-    "Chemistry",
-    "Aisha Khan"
+    "Mathematics",
+    "Rahul Mehta"
   ],
-  "11SCI|2|5": [
-    "Chemistry",
-    "Aisha Khan"
+  "11SCI|2|2": [
+    "Mathematics",
+    "Rahul Mehta"
   ],
   "11SCI|2|8": [
-    "Chemistry",
-    "Aisha Khan"
-  ],
-  "11SCI|4|2": [
-    "Chemistry",
-    "Aisha Khan"
-  ],
-  "11SCI|4|7": [
-    "Chemistry",
-    "Aisha Khan"
-  ],
-  "11SCI|0|2": [
     "Mathematics",
     "Rahul Mehta"
   ],
-  "11SCI|1|7": [
+  "11SCI|3|7": [
     "Mathematics",
     "Rahul Mehta"
-  ],
-  "11SCI|3|6": [
-    "Mathematics",
-    "Rahul Mehta"
-  ],
-  "11SCI|3|8": [
-    "Mathematics",
-    "Rahul Mehta"
-  ],
-  "11SCI|4|0": [
-    "Mathematics",
-    "Rahul Mehta"
-  ],
-  "11SCI|4|3": [
-    "Mathematics",
-    "Rahul Mehta"
-  ],
-  "11SCI|0|6": [
-    "Biology",
-    "Neha Verma"
-  ],
-  "11SCI|0|8": [
-    "Biology",
-    "Neha Verma"
-  ],
-  "11SCI|1|8": [
-    "Biology",
-    "Neha Verma"
-  ],
-  "11SCI|2|3": [
-    "Biology",
-    "Neha Verma"
-  ],
-  "11SCI|2|6": [
-    "Biology",
-    "Neha Verma"
   ],
   "11SCI|4|5": [
+    "Mathematics",
+    "Rahul Mehta"
+  ],
+  "11SCI|4|6": [
+    "Mathematics",
+    "Rahul Mehta"
+  ],
+  "11SCI|0|7": [
     "Biology",
     "Neha Verma"
   ],
-  "11SCI|0|3": [
-    "English",
-    "Daniel Brooks"
+  "11SCI|1|3": [
+    "Biology",
+    "Neha Verma"
+  ],
+  "11SCI|2|5": [
+    "Biology",
+    "Neha Verma"
+  ],
+  "11SCI|3|3": [
+    "Biology",
+    "Neha Verma"
+  ],
+  "11SCI|4|0": [
+    "Biology",
+    "Neha Verma"
+  ],
+  "11SCI|4|7": [
+    "Biology",
+    "Neha Verma"
   ],
   "11SCI|0|5": [
     "English",
@@ -107,31 +103,31 @@
     "English",
     "Daniel Brooks"
   ],
-  "11SCI|2|2": [
+  "11SCI|1|7": [
     "English",
     "Daniel Brooks"
   ],
-  "11SCI|3|3": [
+  "11SCI|2|3": [
+    "English",
+    "Daniel Brooks"
+  ],
+  "11SCI|0|0": [
     "Physical Education",
     "Marcus Lee"
   ],
-  "11SCI|3|7": [
+  "11SCI|1|0": [
     "Physical Education",
     "Marcus Lee"
   ],
-  "12SCI|0|6": [
+  "12SCI|0|3": [
     "Physics",
     "Eric Simon"
   ],
-  "12SCI|1|0": [
+  "12SCI|2|6": [
     "Physics",
     "Eric Simon"
   ],
-  "12SCI|1|7": [
-    "Physics",
-    "Eric Simon"
-  ],
-  "12SCI|1|8": [
+  "12SCI|2|8": [
     "Physics",
     "Eric Simon"
   ],
@@ -139,91 +135,95 @@
     "Physics",
     "Eric Simon"
   ],
-  "12SCI|4|3": [
+  "12SCI|4|0": [
     "Physics",
     "Eric Simon"
   ],
-  "12SCI|0|2": [
-    "Chemistry",
-    "Aisha Khan"
+  "12SCI|4|6": [
+    "Physics",
+    "Eric Simon"
   ],
-  "12SCI|0|7": [
-    "Chemistry",
-    "Aisha Khan"
-  ],
-  "12SCI|1|2": [
-    "Chemistry",
-    "Aisha Khan"
-  ],
-  "12SCI|3|0": [
-    "Chemistry",
-    "Aisha Khan"
-  ],
-  "12SCI|3|5": [
-    "Chemistry",
-    "Aisha Khan"
-  ],
-  "12SCI|3|8": [
+  "12SCI|1|3": [
     "Chemistry",
     "Aisha Khan"
   ],
   "12SCI|1|6": [
-    "Mathematics",
-    "Rahul Mehta"
+    "Chemistry",
+    "Aisha Khan"
   ],
-  "12SCI|2|0": [
-    "Mathematics",
-    "Rahul Mehta"
+  "12SCI|2|2": [
+    "Chemistry",
+    "Aisha Khan"
   ],
   "12SCI|2|3": [
+    "Chemistry",
+    "Aisha Khan"
+  ],
+  "12SCI|3|3": [
+    "Chemistry",
+    "Aisha Khan"
+  ],
+  "12SCI|4|8": [
+    "Chemistry",
+    "Aisha Khan"
+  ],
+  "12SCI|0|2": [
     "Mathematics",
     "Rahul Mehta"
   ],
-  "12SCI|3|2": [
+  "12SCI|0|6": [
     "Mathematics",
     "Rahul Mehta"
   ],
-  "12SCI|4|5": [
+  "12SCI|0|8": [
     "Mathematics",
     "Rahul Mehta"
   ],
-  "12SCI|4|6": [
+  "12SCI|1|0": [
     "Mathematics",
     "Rahul Mehta"
+  ],
+  "12SCI|1|2": [
+    "Mathematics",
+    "Rahul Mehta"
+  ],
+  "12SCI|2|7": [
+    "Mathematics",
+    "Rahul Mehta"
+  ],
+  "12SCI|0|0": [
+    "Biology",
+    "Neha Verma"
   ],
   "12SCI|0|5": [
     "Biology",
     "Neha Verma"
   ],
-  "12SCI|2|2": [
+  "12SCI|1|7": [
+    "Biology",
+    "Neha Verma"
+  ],
+  "12SCI|1|8": [
+    "Biology",
+    "Neha Verma"
+  ],
+  "12SCI|3|2": [
+    "Biology",
+    "Neha Verma"
+  ],
+  "12SCI|4|3": [
     "Biology",
     "Neha Verma"
   ],
   "12SCI|2|5": [
-    "Biology",
-    "Neha Verma"
-  ],
-  "12SCI|3|3": [
-    "Biology",
-    "Neha Verma"
-  ],
-  "12SCI|4|0": [
-    "Biology",
-    "Neha Verma"
-  ],
-  "12SCI|4|8": [
-    "Biology",
-    "Neha Verma"
-  ],
-  "12SCI|0|8": [
     "English",
     "Daniel Brooks"
   ],
-  "12SCI|1|3": [
+  "12SCI|3|0": [
     "English",
     "Daniel Brooks"
   ],
-  "12SCI|3|6": [
+  "12SCI|4|2": [
     "English",
     "Daniel Brooks"
   ],
@@ -231,11 +231,11 @@
     "English",
     "Daniel Brooks"
   ],
-  "12SCI|0|3": [
+  "12SCI|2|0": [
     "Physical Education",
     "Marcus Lee"
   ],
-  "12SCI|2|8": [
+  "12SCI|3|6": [
     "Physical Education",
     "Marcus Lee"
   ]
