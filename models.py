@@ -32,6 +32,8 @@ class SchoolConfig:
     days: List[str] = field(default_factory=lambda: ["Mon", "Tue", "Wed", "Thu", "Fri"])
     periods_per_day: int = 8
     break_periods: Dict[int, str] = field(default_factory=dict)  # e.g. {3: "Lunch"}
+    # Penalty weights for soft constraints, keyed by constraint name
+    penalty_weights: Dict[str, int] = field(default_factory=dict)
 
 @dataclass
 class ClassPriorityConfig:

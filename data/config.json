@@ -6,9 +6,9 @@
     "Thu",
     "Fri"
   ],
-  "periods_per_day": 9,
+  "periods_per_day": 10,
   "break_periods": {
-    "4": "Lunch",
-    "1": "Fruit Break"
+    "7": "Lunch",
+    "3": "Fruit Break"
   }
 }

@@ -1,74 +1,229 @@
 [
   {
-    "id": "11SCI",
-    "name": "11SCI",
+    "id": "1A",
+    "name": "Class 1A",
     "subjects": [
-      {
-        "subject": "Physics",
-        "weekly_periods": 6,
-        "teacher_id": "Eric Simon"
-      },
-      {
-        "subject": "Chemistry",
-        "weekly_periods": 6,
-        "teacher_id": "Aisha Khan"
-      },
-      {
-        "subject": "Mathematics",
-        "weekly_periods": 6,
-        "teacher_id": "Rahul Mehta"
-      },
-      {
-        "subject": "Biology",
-        "weekly_periods": 6,
-        "teacher_id": "Neha Verma"
-      },
-      {
-        "subject": "English",
-        "weekly_periods": 4,
-        "teacher_id": "Daniel Brooks"
-      },
-      {
-        "subject": "Physical Education",
-        "weekly_periods": 2,
-        "teacher_id": "Marcus Lee"
-      }
+      {"subject":"English","weekly_periods":6,"teacher_id":"T001"},
+      {"subject":"Mathematics","weekly_periods":6,"teacher_id":"T002"},
+      {"subject":"Hindi","weekly_periods":5,"teacher_id":"T003"},
+      {"subject":"EVS","weekly_periods":5,"teacher_id":"T004"},
+      {"subject":"Physical Education","weekly_periods":2,"teacher_id":"T019"}
     ]
   },
   {
-    "id": "12SCI",
-    "name": "12SCI",
+    "id": "2A",
+    "name": "Class 2A",
     "subjects": [
-      {
-        "subject": "Physics",
-        "weekly_periods": 6,
-        "teacher_id": "Eric Simon"
-      },
-      {
-        "subject": "Chemistry",
-        "weekly_periods": 6,
-        "teacher_id": "Aisha Khan"
-      },
-      {
-        "subject": "Mathematics",
-        "weekly_periods": 6,
-        "teacher_id": "Rahul Mehta"
-      },
-      {
-        "subject": "Biology",
-        "weekly_periods": 6,
-        "teacher_id": "Neha Verma"
-      },
-      {
-        "subject": "English",
-        "weekly_periods": 4,
-        "teacher_id": "Daniel Brooks"
-      },
-      {
-        "subject": "Physical Education",
-        "weekly_periods": 2,
-        "teacher_id": "Marcus Lee"
-      }
+      {"subject":"English","weekly_periods":6,"teacher_id":"T001"},
+      {"subject":"Mathematics","weekly_periods":6,"teacher_id":"T002"},
+      {"subject":"Hindi","weekly_periods":5,"teacher_id":"T003"},
+      {"subject":"EVS","weekly_periods":5,"teacher_id":"T004"},
+      {"subject":"Physical Education","weekly_periods":2,"teacher_id":"T019"}
+    ]
+  },
+  {
+    "id": "3A",
+    "name": "Class 3A",
+    "subjects": [
+      {"subject":"English","weekly_periods":6,"teacher_id":"T001"},
+      {"subject":"Mathematics","weekly_periods":6,"teacher_id":"T002"},
+      {"subject":"Hindi","weekly_periods":5,"teacher_id":"T003"},
+      {"subject":"EVS","weekly_periods":5,"teacher_id":"T004"},
+      {"subject":"Physical Education","weekly_periods":2,"teacher_id":"T019"}
+    ]
+  },
+  {
+    "id": "4A",
+    "name": "Class 4A",
+    "subjects": [
+      {"subject":"English","weekly_periods":6,"teacher_id":"T005"},
+      {"subject":"Mathematics","weekly_periods":6,"teacher_id":"T006"},
+      {"subject":"Hindi","weekly_periods":5,"teacher_id":"T003"},
+      {"subject":"EVS","weekly_periods":5,"teacher_id":"T004"},
+      {"subject":"Physical Education","weekly_periods":2,"teacher_id":"T019"}
+    ]
+  },
+  {
+    "id": "5A",
+    "name": "Class 5A",
+    "subjects": [
+      {"subject":"English","weekly_periods":6,"teacher_id":"T005"},
+      {"subject":"Mathematics","weekly_periods":6,"teacher_id":"T006"},
+      {"subject":"Hindi","weekly_periods":5,"teacher_id":"T003"},
+      {"subject":"EVS","weekly_periods":5,"teacher_id":"T004"},
+      {"subject":"Physical Education","weekly_periods":2,"teacher_id":"T019"}
+    ]
+  },
+  {
+    "id": "6A",
+    "name": "Class 6A",
+    "subjects": [
+      {"subject":"English","weekly_periods":5,"teacher_id":"T005"},
+      {"subject":"Mathematics","weekly_periods":6,"teacher_id":"T006"},
+      {"subject":"Science","weekly_periods":6,"teacher_id":"T007"},
+      {"subject":"Social Science","weekly_periods":5,"teacher_id":"T008"},
+      {"subject":"Physical Education","weekly_periods":2,"teacher_id":"T019"}
+    ]
+  },
+  {
+    "id": "7A",
+    "name": "Class 7A",
+    "subjects": [
+      {"subject":"English","weekly_periods":5,"teacher_id":"T010"},
+      {"subject":"Mathematics","weekly_periods":6,"teacher_id":"T009"},
+      {"subject":"Science","weekly_periods":6,"teacher_id":"T007"},
+      {"subject":"Social Science","weekly_periods":5,"teacher_id":"T008"},
+      {"subject":"Physical Education","weekly_periods":2,"teacher_id":"T019"}
+    ]
+  },
+  {
+    "id": "8A",
+    "name": "Class 8A",
+    "subjects": [
+      {"subject":"English","weekly_periods":5,"teacher_id":"T010"},
+      {"subject":"Mathematics","weekly_periods":6,"teacher_id":"T009"},
+      {"subject":"Science","weekly_periods":6,"teacher_id":"T007"},
+      {"subject":"Social Science","weekly_periods":5,"teacher_id":"T008"},
+      {"subject":"Computer Science","weekly_periods":3,"teacher_id":"T020"},
+      {"subject":"Physical Education","weekly_periods":2,"teacher_id":"T019"}
+    ]
+  },
+  {
+    "id": "9A",
+    "name": "Class 9A",
+    "subjects": [
+      {"subject":"English","weekly_periods":5,"teacher_id":"T010"},
+      {"subject":"Mathematics","weekly_periods":6,"teacher_id":"T009"},
+      {"subject":"Physics","weekly_periods":4,"teacher_id":"T011"},
+      {"subject":"Chemistry","weekly_periods":4,"teacher_id":"T012"},
+      {"subject":"Biology","weekly_periods":4,"teacher_id":"T013"},
+      {"subject":"History","weekly_periods":4,"teacher_id":"T018"},
+      {"subject":"Computer Science","weekly_periods":3,"teacher_id":"T020"},
+      {"subject":"Physical Education","weekly_periods":2,"teacher_id":"T019"}
+    ]
+  },
+  {
+    "id": "10A",
+    "name": "Class 10A",
+    "subjects": [
+      {"subject":"English","weekly_periods":5,"teacher_id":"T010"},
+      {"subject":"Mathematics","weekly_periods":6,"teacher_id":"T009"},
+      {"subject":"Physics","weekly_periods":4,"teacher_id":"T011"},
+      {"subject":"Chemistry","weekly_periods":4,"teacher_id":"T012"},
+      {"subject":"Biology","weekly_periods":4,"teacher_id":"T013"},
+      {"subject":"History","weekly_periods":4,"teacher_id":"T018"},
+      {"subject":"Computer Science","weekly_periods":3,"teacher_id":"T020"},
+      {"subject":"Physical Education","weekly_periods":2,"teacher_id":"T019"}
+    ]
+  },
+  {
+    "id":"11SCI-MED",
+    "name":"11 Science Medical",
+    "group":"11SCI",
+    "stream":"Science",
+    "division":"Medical",
+    "sync_group":"11SCI_COMMON",
+    "subjects":[
+      {"subject":"Physics","weekly_periods":6,"teacher_id":"T011"},
+      {"subject":"Chemistry","weekly_periods":6,"teacher_id":"T012"},
+      {"subject":"Biology","weekly_periods":6,"teacher_id":"T013"},
+      {"subject":"English","weekly_periods":4,"teacher_id":"T014"},
+      {"subject":"Physical Education","weekly_periods":2,"teacher_id":"T019"}
+    ]
+  },
+  {
+    "id":"11SCI-NM",
+    "name":"11 Science Non Medical",
+    "group":"11SCI",
+    "stream":"Science",
+    "division":"Non Medical",
+    "sync_group":"11SCI_COMMON",
+    "subjects":[
+      {"subject":"Physics","weekly_periods":6,"teacher_id":"T011"},
+      {"subject":"Chemistry","weekly_periods":6,"teacher_id":"T012"},
+      {"subject":"Mathematics","weekly_periods":6,"teacher_id":"T009"},
+      {"subject":"Computer Science","weekly_periods":4,"teacher_id":"T020"},
+      {"subject":"English","weekly_periods":4,"teacher_id":"T014"},
+      {"subject":"Physical Education","weekly_periods":2,"teacher_id":"T019"}
+    ]
+  },
+  {
+    "id":"11COM-A",
+    "name":"11 Commerce",
+    "stream":"Commerce",
+    "subjects":[
+      {"subject":"Economics","weekly_periods":6,"teacher_id":"T016"},
+      {"subject":"Accountancy","weekly_periods":6,"teacher_id":"T015"},
+      {"subject":"English","weekly_periods":4,"teacher_id":"T014"},
+      {"subject":"Computer Science","weekly_periods":4,"teacher_id":"T020"},
+      {"subject":"Physical Education","weekly_periods":2,"teacher_id":"T019"}
+    ]
+  },
+  {
+    "id":"11HUM-A",
+    "name":"11 Humanities",
+    "stream":"Humanities",
+    "subjects":[
+      {"subject":"History","weekly_periods":6,"teacher_id":"T018"},
+      {"subject":"Political Science","weekly_periods":6,"teacher_id":"T017"},
+      {"subject":"Economics","weekly_periods":5,"teacher_id":"T016"},
+      {"subject":"English","weekly_periods":4,"teacher_id":"T014"},
+      {"subject":"Physical Education","weekly_periods":2,"teacher_id":"T019"}
+    ]
+  },
+  {
+    "id":"12SCI-MED",
+    "name":"12 Science Medical",
+    "group":"12SCI",
+    "stream":"Science",
+    "division":"Medical",
+    "sync_group":"12SCI_COMMON",
+    "subjects":[
+      {"subject":"Physics","weekly_periods":6,"teacher_id":"T011"},
+      {"subject":"Chemistry","weekly_periods":6,"teacher_id":"T012"},
+      {"subject":"Biology","weekly_periods":6,"teacher_id":"T013"},
+      {"subject":"English","weekly_periods":4,"teacher_id":"T014"},
+      {"subject":"Physical Education","weekly_periods":2,"teacher_id":"T019"}
+    ]
+  },
+  {
+    "id":"12SCI-NM",
+    "name":"12 Science Non Medical",
+    "group":"12SCI",
+    "stream":"Science",
+    "division":"Non Medical",
+    "sync_group":"12SCI_COMMON",
+    "subjects":[
+      {"subject":"Physics","weekly_periods":6,"teacher_id":"T011"},
+      {"subject":"Chemistry","weekly_periods":6,"teacher_id":"T012"},
+      {"subject":"Mathematics","weekly_periods":6,"teacher_id":"T009"},
+      {"subject":"Computer Science","weekly_periods":4,"teacher_id":"T020"},
+      {"subject":"English","weekly_periods":4,"teacher_id":"T014"},
+      {"subject":"Physical Education","weekly_periods":2,"teacher_id":"T019"}
+    ]
+  },
+  {
+    "id":"12COM-A",
+    "name":"12 Commerce",
+    "stream":"Commerce",
+    "subjects":[
+      {"subject":"Economics","weekly_periods":6,"teacher_id":"T016"},
+      {"subject":"Accountancy","weekly_periods":6,"teacher_id":"T015"},
+      {"subject":"English","weekly_periods":4,"teacher_id":"T014"},
+      {"subject":"Computer Science","weekly_periods":4,"teacher_id":"T020"},
+      {"subject":"Physical Education","weekly_periods":2,"teacher_id":"T019"}
+    ]
+  },
+  {
+    "id":"12HUM-A",
+    "name":"12 Humanities",
+    "stream":"Humanities",
+    "subjects":[
+      {"subject":"History","weekly_periods":6,"teacher_id":"T018"},
+      {"subject":"Political Science","weekly_periods":6,"teacher_id":"T017"},
+      {"subject":"Economics","weekly_periods":5,"teacher_id":"T016"},
+      {"subject":"English","weekly_periods":4,"teacher_id":"T014"},
+      {"subject":"Physical Education","weekly_periods":2,"teacher_id":"T019"}
     ]
   }
 ]

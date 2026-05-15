@@ -5,7 +5,7 @@ import random
 from typing import Dict, List, Optional, Tuple
 
 from models import Class, ClassPriorityConfig, SchoolConfig
-from solver.scoring import compute_timetable_score
+from solver.scoring import compute_timetable_score, compute_free_period_penalty
 
 
 def is_valid_swap(
@@ -86,14 +86,20 @@ def improve_timetable(
 
     best = dict(class_timetable)
     best_score = compute_timetable_score(best, config, priority_configs)
+    best_penalty = compute_free_period_penalty(best, config)
+    best_total = best_score - best_penalty
 
     for _ in range(max_iters):
         swapped = try_swap(best, config, class_subject_info)
         if swapped is None:
             continue
         new_score = compute_timetable_score(swapped, config, priority_configs)
-        if new_score > best_score:
+        new_pen = compute_free_period_penalty(swapped, config)
+        new_total = new_score - new_pen
+        if new_total > best_total:
             best = swapped
             best_score = new_score
+            best_penalty = new_pen
+            best_total = new_total
 
     return best

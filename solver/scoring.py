@@ -16,7 +16,7 @@ def compute_timetable_score(
     - Penalty: back-to-back heavy subjects
     """
     num_periods = config.periods_per_day
-    breaks = set(config.break_period_indices)
+    breaks = set(config.break_periods.keys())
     priority_map = {pc.class_id: pc for pc in priority_configs}
 
     score = 0.0
@@ -48,3 +48,44 @@ def compute_timetable_score(
                     score -= 2.0
 
     return score
+
+
+def compute_free_period_penalty(
+    class_timetable: Dict[Tuple[str, int, int], Tuple[str, str]],
+    config: SchoolConfig,
+) -> int:
+    """Compute total penalty for free periods beyond allowed per day per class.
+
+    Uses `config.penalty_weights.get('class_free_periods', 10)` as weight per extra free period.
+    """
+    days = len(config.days)
+    periods_per_day = config.periods_per_day
+    breaks = set(config.break_periods.keys())
+    non_breaks = max(0, periods_per_day - len(breaks))
+    max_free = 2
+    weight = config.penalty_weights.get('class_free_periods', 10)
+
+    # collect occupied counts per class/day
+    counts = {}
+    for (cid, d, p), (subj, _) in class_timetable.items():
+        counts[(cid, d)] = counts.get((cid, d), 0) + 1
+
+    total = 0
+    for (cid, d), occupied in counts.items():
+        free = non_breaks - occupied
+        if free > max_free:
+            total += (free - max_free) * weight
+
+    # classes/days with zero entries might mean fully free days; account them
+    # For simplicity, assume classes that have no entries for a day are fully free
+    # and thus incur penalty for all free slots beyond allowed.
+    # Identify class ids
+    class_ids = {k[0] for k in class_timetable}
+    for cid in class_ids:
+        for d in range(days):
+            if (cid, d) not in counts:
+                free = non_breaks
+                if free > max_free:
+                    total += (free - max_free) * weight
+
+    return total

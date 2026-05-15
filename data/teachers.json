@@ -1,134 +1,242 @@
 [
   {
-    "teacher_id": "Eric Simon",
-    "name": "Eric Simon",
-    "subjects": [
-      "Physics"
-    ],
-    "sections": [],
+    "teacher_id": "T001",
+    "name": "Anita Sharma",
+    "subjects": ["English"],
+    "grades": [1,2,3],
+    "sections": ["1A","2A","3A"],
+    "max_periods_per_day": 6,
+    "max_periods_per_week": 30,
+    "target_free_periods_per_day": 2
+  },
+  {
+    "teacher_id": "T002",
+    "name": "Rohit Verma",
+    "subjects": ["Mathematics"],
+    "grades": [1,2,3],
+    "sections": ["1A","2A","3A"],
+    "max_periods_per_day": 6,
+    "max_periods_per_week": 30,
+    "target_free_periods_per_day": 2
+  },
+  {
+    "teacher_id": "T003",
+    "name": "Meera Joshi",
+    "subjects": ["Hindi"],
+    "grades": [1,2,3,4],
+    "sections": ["1A","2A","3A","4A"],
+    "max_periods_per_day": 6,
+    "max_periods_per_week": 32,
+    "target_free_periods_per_day": 2
+  },
+  {
+    "teacher_id": "T004",
+    "name": "Sanjay Rao",
+    "subjects": ["EVS"],
+    "grades": [1,2,3,4,5],
+    "sections": ["1A","2A","3A","4A","5A"],
+    "max_periods_per_day": 5,
+    "max_periods_per_week": 28,
+    "target_free_periods_per_day": 3
+  },
+  {
+    "teacher_id": "T005",
+    "name": "Pooja Nair",
+    "subjects": ["English"],
+    "grades": [4,5,6],
+    "sections": ["4A","5A","6A"],
     "max_periods_per_day": 5,
     "max_periods_per_week": 30,
     "target_free_periods_per_day": 3
   },
   {
-    "teacher_id": "Aisha Khan",
-    "name": "Aisha Khan",
-    "subjects": [
-      "Chemistry"
-    ],
-    "sections": [],
+    "teacher_id": "T006",
+    "name": "Arvind Kapoor",
+    "subjects": ["Mathematics"],
+    "grades": [4,5,6],
+    "sections": ["4A","5A","6A"],
+    "max_periods_per_day": 6,
+    "max_periods_per_week": 34,
+    "target_free_periods_per_day": 2
+  },
+  {
+    "teacher_id": "T007",
+    "name": "Nisha Bedi",
+    "subjects": ["Science"],
+    "grades": [6,7,8],
+    "sections": ["6A","7A","8A"],
     "max_periods_per_day": 5,
     "max_periods_per_week": 30,
     "target_free_periods_per_day": 3
   },
   {
-    "teacher_id": "Rahul Mehta",
+    "teacher_id": "T008",
+    "name": "Kiran Malhotra",
+    "subjects": ["Social Science"],
+    "grades": [6,7,8],
+    "sections": ["6A","7A","8A"],
+    "max_periods_per_day": 5,
+    "max_periods_per_week": 28,
+    "target_free_periods_per_day": 3
+  },
+  {
+    "teacher_id": "T009",
     "name": "Rahul Mehta",
-    "subjects": [
-      "Mathematics"
+    "subjects": ["Mathematics"],
+    "grades": [7,8,9,10,11,12],
+    "sections": [
+      "7A","8A","9A","10A",
+      "11SCI-NM","12SCI-NM"
     ],
-    "sections": [],
+    "max_periods_per_day": 6,
+    "max_periods_per_week": 36,
+    "target_free_periods_per_day": 2
+  },
+  {
+    "teacher_id": "T010",
+    "name": "Priya Kapoor",
+    "subjects": ["English"],
+    "grades": [7,8,9,10],
+    "sections": ["7A","8A","9A","10A"],
     "max_periods_per_day": 5,
     "max_periods_per_week": 30,
     "target_free_periods_per_day": 3
   },
   {
-    "teacher_id": "Neha Verma",
+    "teacher_id": "T011",
+    "name": "Arjun Singh",
+    "subjects": ["Physics"],
+    "grades": [9,10,11,12],
+    "sections": [
+      "9A","10A",
+      "11SCI-MED","11SCI-NM",
+      "12SCI-MED","12SCI-NM"
+    ],
+    "max_periods_per_day": 5,
+    "max_periods_per_week": 30,
+    "target_free_periods_per_day": 3
+  },
+  {
+    "teacher_id": "T012",
+    "name": "Aisha Khan",
+    "subjects": ["Chemistry"],
+    "grades": [9,10,11,12],
+    "sections": [
+      "9A","10A",
+      "11SCI-MED","11SCI-NM",
+      "12SCI-MED","12SCI-NM"
+    ],
+    "max_periods_per_day": 5,
+    "max_periods_per_week": 30,
+    "target_free_periods_per_day": 3
+  },
+  {
+    "teacher_id": "T013",
     "name": "Neha Verma",
-    "subjects": [
-      "Biology"
+    "subjects": ["Biology"],
+    "grades": [9,10,11,12],
+    "sections": [
+      "9A","10A",
+      "11SCI-MED","12SCI-MED"
     ],
-    "sections": [],
     "max_periods_per_day": 5,
-    "max_periods_per_week": 30,
+    "max_periods_per_week": 28,
     "target_free_periods_per_day": 3
   },
   {
-    "teacher_id": "Daniel Brooks",
+    "teacher_id": "T014",
     "name": "Daniel Brooks",
-    "subjects": [
-      "English"
+    "subjects": ["English"],
+    "grades": [11,12],
+    "sections": [
+      "11SCI-MED","11SCI-NM",
+      "11COM-A","11HUM-A",
+      "12SCI-MED","12SCI-NM",
+      "12COM-A","12HUM-A"
     ],
-    "sections": [],
+    "max_periods_per_day": 5,
+    "max_periods_per_week": 26,
+    "target_free_periods_per_day": 3
+  },
+  {
+    "teacher_id": "T015",
+    "name": "Arvind Rao",
+    "subjects": ["Accountancy"],
+    "grades": [11,12],
+    "sections": [
+      "11COM-A","12COM-A"
+    ],
+    "max_periods_per_day": 5,
+    "max_periods_per_week": 24,
+    "target_free_periods_per_day": 3
+  },
+  {
+    "teacher_id": "T016",
+    "name": "Sofia Mendes",
+    "subjects": ["Economics"],
+    "grades": [11,12],
+    "sections": [
+      "11COM-A","11HUM-A",
+      "12COM-A","12HUM-A"
+    ],
+    "max_periods_per_day": 5,
+    "max_periods_per_week": 24,
+    "target_free_periods_per_day": 3
+  },
+  {
+    "teacher_id": "T017",
+    "name": "Aman Gupta",
+    "subjects": ["Political Science"],
+    "grades": [11,12],
+    "sections": [
+      "11HUM-A","12HUM-A"
+    ],
+    "max_periods_per_day": 5,
+    "max_periods_per_week": 24,
+    "target_free_periods_per_day": 3
+  },
+  {
+    "teacher_id": "T018",
+    "name": "Ritu Chawla",
+    "subjects": ["History"],
+    "grades": [9,10,11,12],
+    "sections": [
+      "9A","10A",
+      "11HUM-A","12HUM-A"
+    ],
+    "max_periods_per_day": 5,
+    "max_periods_per_week": 28,
+    "target_free_periods_per_day": 3
+  },
+  {
+    "teacher_id": "T019",
+    "name": "Marcus Lee",
+    "subjects": ["Physical Education"],
+    "grades": [1,2,3,4,5,6,7,8,9,10,11,12],
+    "sections": [
+      "1A","2A","3A","4A","5A","6A",
+      "7A","8A","9A","10A",
+      "11SCI-MED","11SCI-NM",
+      "11COM-A","11HUM-A",
+      "12SCI-MED","12SCI-NM",
+      "12COM-A","12HUM-A"
+    ],
     "max_periods_per_day": 4,
     "max_periods_per_week": 20,
     "target_free_periods_per_day": 4
   },
   {
-    "teacher_id": "Priya Nair",
-    "name": "Priya Nair",
-    "subjects": [
-      "Economics"
+    "teacher_id": "T020",
+    "name": "Sneha Iyer",
+    "subjects": ["Computer Science"],
+    "grades": [8,9,10,11,12],
+    "sections": [
+      "8A","9A","10A",
+      "11SCI-NM","12SCI-NM",
+      "11COM-A","12COM-A"
     ],
-    "sections": [],
     "max_periods_per_day": 5,
-    "max_periods_per_week": 30,
+    "max_periods_per_week": 25,
     "target_free_periods_per_day": 3
-  },
-  {
-    "teacher_id": "Arjun Patel",
-    "name": "Arjun Patel",
-    "subjects": [
-      "Accountancy"
-    ],
-    "sections": [],
-    "max_periods_per_day": 5,
-    "max_periods_per_week": 30,
-    "target_free_periods_per_day": 3
-  },
-  {
-    "teacher_id": "Kavita Rao",
-    "name": "Kavita Rao",
-    "subjects": [
-      "Business Studies"
-    ],
-    "sections": [],
-    "max_periods_per_day": 4,
-    "max_periods_per_week": 24,
-    "target_free_periods_per_day": 4
-  },
-  {
-    "teacher_id": "Sofia Mendes",
-    "name": "Sofia Mendes",
-    "subjects": [
-      "History"
-    ],
-    "sections": [],
-    "max_periods_per_day": 5,
-    "max_periods_per_week": 30,
-    "target_free_periods_per_day": 3
-  },
-  {
-    "teacher_id": "Aman Gupta",
-    "name": "Aman Gupta",
-    "subjects": [
-      "Political Science"
-    ],
-    "sections": [],
-    "max_periods_per_day": 5,
-    "max_periods_per_week": 30,
-    "target_free_periods_per_day": 3
-  },
-  {
-    "teacher_id": "Ritu Chawla",
-    "name": "Ritu Chawla",
-    "subjects": [
-      "Geography"
-    ],
-    "sections": [],
-    "max_periods_per_day": 4,
-    "max_periods_per_week": 24,
-    "target_free_periods_per_day": 4
-  },
-  {
-    "teacher_id": "Marcus Lee",
-    "name": "Marcus Lee",
-    "subjects": [
-      "Physical Education"
-    ],
-    "sections": [],
-    "max_periods_per_day": 3,
-    "max_periods_per_week": 15,
-    "target_free_periods_per_day": 5
   }
 ]

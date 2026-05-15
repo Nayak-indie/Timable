@@ -1,242 +1,1814 @@
 {
-  "11SCI|0|2": [
-    "Physics",
-    "Eric Simon"
-  ],
-  "11SCI|1|2": [
-    "Physics",
-    "Eric Simon"
-  ],
-  "11SCI|2|7": [
-    "Physics",
-    "Eric Simon"
-  ],
-  "11SCI|3|2": [
-    "Physics",
-    "Eric Simon"
-  ],
-  "11SCI|3|5": [
-    "Physics",
-    "Eric Simon"
-  ],
-  "11SCI|4|3": [
-    "Physics",
-    "Eric Simon"
-  ],
-  "11SCI|0|3": [
-    "Chemistry",
-    "Aisha Khan"
-  ],
-  "11SCI|0|6": [
-    "Chemistry",
-    "Aisha Khan"
-  ],
-  "11SCI|0|8": [
-    "Chemistry",
-    "Aisha Khan"
-  ],
-  "11SCI|2|0": [
-    "Chemistry",
-    "Aisha Khan"
-  ],
-  "11SCI|3|6": [
-    "Chemistry",
-    "Aisha Khan"
-  ],
-  "11SCI|3|8": [
-    "Chemistry",
-    "Aisha Khan"
-  ],
-  "11SCI|1|5": [
-    "Mathematics",
-    "Rahul Mehta"
-  ],
-  "11SCI|2|2": [
-    "Mathematics",
-    "Rahul Mehta"
-  ],
-  "11SCI|2|8": [
-    "Mathematics",
-    "Rahul Mehta"
-  ],
-  "11SCI|3|7": [
-    "Mathematics",
-    "Rahul Mehta"
-  ],
-  "11SCI|4|5": [
-    "Mathematics",
-    "Rahul Mehta"
-  ],
-  "11SCI|4|6": [
-    "Mathematics",
-    "Rahul Mehta"
-  ],
-  "11SCI|0|7": [
-    "Biology",
-    "Neha Verma"
-  ],
-  "11SCI|1|3": [
-    "Biology",
-    "Neha Verma"
-  ],
-  "11SCI|2|5": [
-    "Biology",
-    "Neha Verma"
-  ],
-  "11SCI|3|3": [
-    "Biology",
-    "Neha Verma"
-  ],
-  "11SCI|4|0": [
-    "Biology",
-    "Neha Verma"
-  ],
-  "11SCI|4|7": [
-    "Biology",
-    "Neha Verma"
-  ],
-  "11SCI|0|5": [
+  "1A|0|6": [
     "English",
-    "Daniel Brooks"
+    "T001"
   ],
-  "11SCI|1|6": [
+  "1A|0|9": [
     "English",
-    "Daniel Brooks"
+    "T001"
   ],
-  "11SCI|1|7": [
+  "1A|1|2": [
     "English",
-    "Daniel Brooks"
+    "T001"
   ],
-  "11SCI|2|3": [
+  "1A|1|5": [
     "English",
-    "Daniel Brooks"
+    "T001"
   ],
-  "11SCI|0|0": [
+  "1A|2|9": [
+    "English",
+    "T001"
+  ],
+  "1A|4|8": [
+    "English",
+    "T001"
+  ],
+  "1A|0|0": [
+    "Mathematics",
+    "T002"
+  ],
+  "1A|1|0": [
+    "Mathematics",
+    "T002"
+  ],
+  "1A|2|1": [
+    "Mathematics",
+    "T002"
+  ],
+  "1A|3|2": [
+    "Mathematics",
+    "T002"
+  ],
+  "1A|3|6": [
+    "Mathematics",
+    "T002"
+  ],
+  "1A|3|8": [
+    "Mathematics",
+    "T002"
+  ],
+  "1A|0|5": [
+    "Hindi",
+    "T003"
+  ],
+  "1A|2|5": [
+    "Hindi",
+    "T003"
+  ],
+  "1A|3|0": [
+    "Hindi",
+    "T003"
+  ],
+  "1A|3|1": [
+    "Hindi",
+    "T003"
+  ],
+  "1A|4|5": [
+    "Hindi",
+    "T003"
+  ],
+  "1A|0|1": [
+    "EVS",
+    "T004"
+  ],
+  "1A|1|4": [
+    "EVS",
+    "T004"
+  ],
+  "1A|1|8": [
+    "EVS",
+    "T004"
+  ],
+  "1A|2|8": [
+    "EVS",
+    "T004"
+  ],
+  "1A|3|5": [
+    "EVS",
+    "T004"
+  ],
+  "1A|3|9": [
     "Physical Education",
-    "Marcus Lee"
+    "T019"
   ],
-  "11SCI|1|0": [
+  "1A|4|1": [
     "Physical Education",
-    "Marcus Lee"
+    "T019"
   ],
-  "12SCI|0|3": [
-    "Physics",
-    "Eric Simon"
-  ],
-  "12SCI|2|6": [
-    "Physics",
-    "Eric Simon"
-  ],
-  "12SCI|2|8": [
-    "Physics",
-    "Eric Simon"
-  ],
-  "12SCI|3|7": [
-    "Physics",
-    "Eric Simon"
-  ],
-  "12SCI|4|0": [
-    "Physics",
-    "Eric Simon"
-  ],
-  "12SCI|4|6": [
-    "Physics",
-    "Eric Simon"
-  ],
-  "12SCI|1|3": [
-    "Chemistry",
-    "Aisha Khan"
-  ],
-  "12SCI|1|6": [
-    "Chemistry",
-    "Aisha Khan"
-  ],
-  "12SCI|2|2": [
-    "Chemistry",
-    "Aisha Khan"
-  ],
-  "12SCI|2|3": [
-    "Chemistry",
-    "Aisha Khan"
-  ],
-  "12SCI|3|3": [
-    "Chemistry",
-    "Aisha Khan"
-  ],
-  "12SCI|4|8": [
-    "Chemistry",
-    "Aisha Khan"
-  ],
-  "12SCI|0|2": [
-    "Mathematics",
-    "Rahul Mehta"
-  ],
-  "12SCI|0|6": [
-    "Mathematics",
-    "Rahul Mehta"
-  ],
-  "12SCI|0|8": [
-    "Mathematics",
-    "Rahul Mehta"
-  ],
-  "12SCI|1|0": [
-    "Mathematics",
-    "Rahul Mehta"
-  ],
-  "12SCI|1|2": [
-    "Mathematics",
-    "Rahul Mehta"
-  ],
-  "12SCI|2|7": [
-    "Mathematics",
-    "Rahul Mehta"
-  ],
-  "12SCI|0|0": [
-    "Biology",
-    "Neha Verma"
-  ],
-  "12SCI|0|5": [
-    "Biology",
-    "Neha Verma"
-  ],
-  "12SCI|1|7": [
-    "Biology",
-    "Neha Verma"
-  ],
-  "12SCI|1|8": [
-    "Biology",
-    "Neha Verma"
-  ],
-  "12SCI|3|2": [
-    "Biology",
-    "Neha Verma"
-  ],
-  "12SCI|4|3": [
-    "Biology",
-    "Neha Verma"
-  ],
-  "12SCI|2|5": [
+  "2A|0|5": [
     "English",
-    "Daniel Brooks"
+    "T001"
   ],
-  "12SCI|3|0": [
+  "2A|2|2": [
     "English",
-    "Daniel Brooks"
+    "T001"
   ],
-  "12SCI|4|2": [
+  "2A|2|8": [
     "English",
-    "Daniel Brooks"
+    "T001"
   ],
-  "12SCI|4|7": [
+  "2A|3|9": [
     "English",
-    "Daniel Brooks"
+    "T001"
   ],
-  "12SCI|2|0": [
+  "2A|4|0": [
+    "English",
+    "T001"
+  ],
+  "2A|4|2": [
+    "English",
+    "T001"
+  ],
+  "2A|0|1": [
+    "Mathematics",
+    "T002"
+  ],
+  "2A|1|1": [
+    "Mathematics",
+    "T002"
+  ],
+  "2A|2|9": [
+    "Mathematics",
+    "T002"
+  ],
+  "2A|3|1": [
+    "Mathematics",
+    "T002"
+  ],
+  "2A|4|1": [
+    "Mathematics",
+    "T002"
+  ],
+  "2A|4|5": [
+    "Mathematics",
+    "T002"
+  ],
+  "2A|0|6": [
+    "Hindi",
+    "T003"
+  ],
+  "2A|1|5": [
+    "Hindi",
+    "T003"
+  ],
+  "2A|3|2": [
+    "Hindi",
+    "T003"
+  ],
+  "2A|3|5": [
+    "Hindi",
+    "T003"
+  ],
+  "2A|4|6": [
+    "Hindi",
+    "T003"
+  ],
+  "2A|0|9": [
+    "EVS",
+    "T004"
+  ],
+  "2A|1|2": [
+    "EVS",
+    "T004"
+  ],
+  "2A|1|9": [
+    "EVS",
+    "T004"
+  ],
+  "2A|2|0": [
+    "EVS",
+    "T004"
+  ],
+  "2A|2|5": [
+    "EVS",
+    "T004"
+  ],
+  "2A|0|8": [
     "Physical Education",
-    "Marcus Lee"
+    "T019"
   ],
-  "12SCI|3|6": [
+  "2A|4|8": [
     "Physical Education",
-    "Marcus Lee"
+    "T019"
+  ],
+  "3A|0|0": [
+    "English",
+    "T001"
+  ],
+  "3A|1|1": [
+    "English",
+    "T001"
+  ],
+  "3A|1|9": [
+    "English",
+    "T001"
+  ],
+  "3A|2|1": [
+    "English",
+    "T001"
+  ],
+  "3A|3|0": [
+    "English",
+    "T001"
+  ],
+  "3A|3|8": [
+    "English",
+    "T001"
+  ],
+  "3A|0|2": [
+    "Mathematics",
+    "T002"
+  ],
+  "3A|1|5": [
+    "Mathematics",
+    "T002"
+  ],
+  "3A|1|6": [
+    "Mathematics",
+    "T002"
+  ],
+  "3A|2|5": [
+    "Mathematics",
+    "T002"
+  ],
+  "3A|4|4": [
+    "Mathematics",
+    "T002"
+  ],
+  "3A|4|6": [
+    "Mathematics",
+    "T002"
+  ],
+  "3A|0|9": [
+    "Hindi",
+    "T003"
+  ],
+  "3A|1|4": [
+    "Hindi",
+    "T003"
+  ],
+  "3A|2|2": [
+    "Hindi",
+    "T003"
+  ],
+  "3A|2|4": [
+    "Hindi",
+    "T003"
+  ],
+  "3A|4|1": [
+    "Hindi",
+    "T003"
+  ],
+  "3A|1|0": [
+    "EVS",
+    "T004"
+  ],
+  "3A|2|9": [
+    "EVS",
+    "T004"
+  ],
+  "3A|3|2": [
+    "EVS",
+    "T004"
+  ],
+  "3A|4|8": [
+    "EVS",
+    "T004"
+  ],
+  "3A|4|9": [
+    "EVS",
+    "T004"
+  ],
+  "3A|0|5": [
+    "Physical Education",
+    "T019"
+  ],
+  "3A|3|5": [
+    "Physical Education",
+    "T019"
+  ],
+  "4A|0|2": [
+    "English",
+    "T005"
+  ],
+  "4A|0|8": [
+    "English",
+    "T005"
+  ],
+  "4A|1|5": [
+    "English",
+    "T005"
+  ],
+  "4A|2|6": [
+    "English",
+    "T005"
+  ],
+  "4A|3|1": [
+    "English",
+    "T005"
+  ],
+  "4A|3|8": [
+    "English",
+    "T005"
+  ],
+  "4A|0|1": [
+    "Mathematics",
+    "T006"
+  ],
+  "4A|0|5": [
+    "Mathematics",
+    "T006"
+  ],
+  "4A|1|0": [
+    "Mathematics",
+    "T006"
+  ],
+  "4A|2|5": [
+    "Mathematics",
+    "T006"
+  ],
+  "4A|3|2": [
+    "Mathematics",
+    "T006"
+  ],
+  "4A|3|9": [
+    "Mathematics",
+    "T006"
+  ],
+  "4A|1|1": [
+    "Hindi",
+    "T003"
+  ],
+  "4A|1|8": [
+    "Hindi",
+    "T003"
+  ],
+  "4A|2|8": [
+    "Hindi",
+    "T003"
+  ],
+  "4A|4|4": [
+    "Hindi",
+    "T003"
+  ],
+  "4A|4|8": [
+    "Hindi",
+    "T003"
+  ],
+  "4A|0|4": [
+    "EVS",
+    "T004"
+  ],
+  "4A|3|4": [
+    "EVS",
+    "T004"
+  ],
+  "4A|3|6": [
+    "EVS",
+    "T004"
+  ],
+  "4A|4|1": [
+    "EVS",
+    "T004"
+  ],
+  "4A|4|6": [
+    "EVS",
+    "T004"
+  ],
+  "4A|0|9": [
+    "Physical Education",
+    "T019"
+  ],
+  "4A|2|1": [
+    "Physical Education",
+    "T019"
+  ],
+  "5A|0|4": [
+    "English",
+    "T005"
+  ],
+  "5A|2|9": [
+    "English",
+    "T005"
+  ],
+  "5A|3|2": [
+    "English",
+    "T005"
+  ],
+  "5A|4|1": [
+    "English",
+    "T005"
+  ],
+  "5A|4|4": [
+    "English",
+    "T005"
+  ],
+  "5A|4|9": [
+    "English",
+    "T005"
+  ],
+  "5A|0|6": [
+    "Mathematics",
+    "T006"
+  ],
+  "5A|0|9": [
+    "Mathematics",
+    "T006"
+  ],
+  "5A|1|1": [
+    "Mathematics",
+    "T006"
+  ],
+  "5A|2|4": [
+    "Mathematics",
+    "T006"
+  ],
+  "5A|3|1": [
+    "Mathematics",
+    "T006"
+  ],
+  "5A|3|5": [
+    "Mathematics",
+    "T006"
+  ],
+  "5A|0|0": [
+    "Hindi",
+    "T003"
+  ],
+  "5A|0|1": [
+    "Hindi",
+    "T003"
+  ],
+  "5A|1|9": [
+    "Hindi",
+    "T003"
+  ],
+  "5A|2|6": [
+    "Hindi",
+    "T003"
+  ],
+  "5A|3|9": [
+    "Hindi",
+    "T003"
+  ],
+  "5A|0|2": [
+    "EVS",
+    "T004"
+  ],
+  "5A|0|8": [
+    "EVS",
+    "T004"
+  ],
+  "5A|2|1": [
+    "EVS",
+    "T004"
+  ],
+  "5A|3|8": [
+    "EVS",
+    "T004"
+  ],
+  "5A|4|5": [
+    "EVS",
+    "T004"
+  ],
+  "5A|1|0": [
+    "Physical Education",
+    "T019"
+  ],
+  "5A|1|5": [
+    "Physical Education",
+    "T019"
+  ],
+  "6A|0|1": [
+    "English",
+    "T005"
+  ],
+  "6A|2|0": [
+    "English",
+    "T005"
+  ],
+  "6A|2|1": [
+    "English",
+    "T005"
+  ],
+  "6A|3|6": [
+    "English",
+    "T005"
+  ],
+  "6A|4|2": [
+    "English",
+    "T005"
+  ],
+  "6A|1|2": [
+    "Mathematics",
+    "T006"
+  ],
+  "6A|2|8": [
+    "Mathematics",
+    "T006"
+  ],
+  "6A|2|9": [
+    "Mathematics",
+    "T006"
+  ],
+  "6A|4|5": [
+    "Mathematics",
+    "T006"
+  ],
+  "6A|4|6": [
+    "Mathematics",
+    "T006"
+  ],
+  "6A|4|8": [
+    "Mathematics",
+    "T006"
+  ],
+  "6A|0|4": [
+    "Science",
+    "T007"
+  ],
+  "6A|0|6": [
+    "Science",
+    "T007"
+  ],
+  "6A|1|0": [
+    "Science",
+    "T007"
+  ],
+  "6A|1|9": [
+    "Science",
+    "T007"
+  ],
+  "6A|3|8": [
+    "Science",
+    "T007"
+  ],
+  "6A|4|0": [
+    "Science",
+    "T007"
+  ],
+  "6A|0|2": [
+    "Social Science",
+    "T008"
+  ],
+  "6A|0|9": [
+    "Social Science",
+    "T008"
+  ],
+  "6A|1|5": [
+    "Social Science",
+    "T008"
+  ],
+  "6A|2|5": [
+    "Social Science",
+    "T008"
+  ],
+  "6A|3|5": [
+    "Social Science",
+    "T008"
+  ],
+  "6A|2|2": [
+    "Physical Education",
+    "T019"
+  ],
+  "6A|3|1": [
+    "Physical Education",
+    "T019"
+  ],
+  "7A|0|0": [
+    "English",
+    "T010"
+  ],
+  "7A|0|6": [
+    "English",
+    "T010"
+  ],
+  "7A|1|6": [
+    "English",
+    "T010"
+  ],
+  "7A|3|0": [
+    "English",
+    "T010"
+  ],
+  "7A|3|4": [
+    "English",
+    "T010"
+  ],
+  "7A|0|1": [
+    "Mathematics",
+    "T009"
+  ],
+  "7A|2|1": [
+    "Mathematics",
+    "T009"
+  ],
+  "7A|3|2": [
+    "Mathematics",
+    "T009"
+  ],
+  "7A|4|0": [
+    "Mathematics",
+    "T009"
+  ],
+  "7A|4|5": [
+    "Mathematics",
+    "T009"
+  ],
+  "7A|4|6": [
+    "Mathematics",
+    "T009"
+  ],
+  "7A|0|9": [
+    "Science",
+    "T007"
+  ],
+  "7A|1|4": [
+    "Science",
+    "T007"
+  ],
+  "7A|2|4": [
+    "Science",
+    "T007"
+  ],
+  "7A|2|8": [
+    "Science",
+    "T007"
+  ],
+  "7A|3|1": [
+    "Science",
+    "T007"
+  ],
+  "7A|3|6": [
+    "Science",
+    "T007"
+  ],
+  "7A|1|1": [
+    "Social Science",
+    "T008"
+  ],
+  "7A|1|9": [
+    "Social Science",
+    "T008"
+  ],
+  "7A|2|6": [
+    "Social Science",
+    "T008"
+  ],
+  "7A|3|8": [
+    "Social Science",
+    "T008"
+  ],
+  "7A|4|1": [
+    "Social Science",
+    "T008"
+  ],
+  "7A|0|4": [
+    "Physical Education",
+    "T019"
+  ],
+  "7A|4|9": [
+    "Physical Education",
+    "T019"
+  ],
+  "8A|0|1": [
+    "English",
+    "T010"
+  ],
+  "8A|1|0": [
+    "English",
+    "T010"
+  ],
+  "8A|1|1": [
+    "English",
+    "T010"
+  ],
+  "8A|2|0": [
+    "English",
+    "T010"
+  ],
+  "8A|2|8": [
+    "English",
+    "T010"
+  ],
+  "8A|1|2": [
+    "Mathematics",
+    "T009"
+  ],
+  "8A|1|5": [
+    "Mathematics",
+    "T009"
+  ],
+  "8A|1|8": [
+    "Mathematics",
+    "T009"
+  ],
+  "8A|2|6": [
+    "Mathematics",
+    "T009"
+  ],
+  "8A|3|6": [
+    "Mathematics",
+    "T009"
+  ],
+  "8A|3|8": [
+    "Mathematics",
+    "T009"
+  ],
+  "8A|0|8": [
+    "Science",
+    "T007"
+  ],
+  "8A|2|1": [
+    "Science",
+    "T007"
+  ],
+  "8A|2|5": [
+    "Science",
+    "T007"
+  ],
+  "8A|3|0": [
+    "Science",
+    "T007"
+  ],
+  "8A|4|1": [
+    "Science",
+    "T007"
+  ],
+  "8A|4|6": [
+    "Science",
+    "T007"
+  ],
+  "8A|0|5": [
+    "Social Science",
+    "T008"
+  ],
+  "8A|2|9": [
+    "Social Science",
+    "T008"
+  ],
+  "8A|3|2": [
+    "Social Science",
+    "T008"
+  ],
+  "8A|4|2": [
+    "Social Science",
+    "T008"
+  ],
+  "8A|4|4": [
+    "Social Science",
+    "T008"
+  ],
+  "8A|0|6": [
+    "Computer Science",
+    "T020"
+  ],
+  "8A|3|5": [
+    "Computer Science",
+    "T020"
+  ],
+  "8A|4|9": [
+    "Computer Science",
+    "T020"
+  ],
+  "8A|3|4": [
+    "Physical Education",
+    "T019"
+  ],
+  "8A|4|0": [
+    "Physical Education",
+    "T019"
+  ],
+  "9A|2|2": [
+    "English",
+    "T010"
+  ],
+  "9A|3|8": [
+    "English",
+    "T010"
+  ],
+  "9A|4|1": [
+    "English",
+    "T010"
+  ],
+  "9A|4|6": [
+    "English",
+    "T010"
+  ],
+  "9A|4|9": [
+    "English",
+    "T010"
+  ],
+  "9A|0|0": [
+    "Mathematics",
+    "T009"
+  ],
+  "9A|0|2": [
+    "Mathematics",
+    "T009"
+  ],
+  "9A|1|6": [
+    "Mathematics",
+    "T009"
+  ],
+  "9A|2|0": [
+    "Mathematics",
+    "T009"
+  ],
+  "9A|3|9": [
+    "Mathematics",
+    "T009"
+  ],
+  "9A|4|2": [
+    "Mathematics",
+    "T009"
+  ],
+  "9A|1|0": [
+    "Physics",
+    "T011"
+  ],
+  "9A|3|4": [
+    "Physics",
+    "T011"
+  ],
+  "9A|4|0": [
+    "Physics",
+    "T011"
+  ],
+  "9A|4|8": [
+    "Physics",
+    "T011"
+  ],
+  "9A|0|4": [
+    "Chemistry",
+    "T012"
+  ],
+  "9A|0|5": [
+    "Chemistry",
+    "T012"
+  ],
+  "9A|0|8": [
+    "Chemistry",
+    "T012"
+  ],
+  "9A|1|9": [
+    "Chemistry",
+    "T012"
+  ],
+  "9A|0|9": [
+    "Biology",
+    "T013"
+  ],
+  "9A|1|2": [
+    "Biology",
+    "T013"
+  ],
+  "9A|2|8": [
+    "Biology",
+    "T013"
+  ],
+  "9A|2|9": [
+    "Biology",
+    "T013"
+  ],
+  "9A|1|1": [
+    "History",
+    "T018"
+  ],
+  "9A|3|1": [
+    "History",
+    "T018"
+  ],
+  "9A|3|5": [
+    "History",
+    "T018"
+  ],
+  "9A|4|5": [
+    "History",
+    "T018"
+  ],
+  "9A|1|4": [
+    "Computer Science",
+    "T020"
+  ],
+  "9A|1|8": [
+    "Computer Science",
+    "T020"
+  ],
+  "9A|2|4": [
+    "Computer Science",
+    "T020"
+  ],
+  "9A|2|6": [
+    "Physical Education",
+    "T019"
+  ],
+  "9A|3|0": [
+    "Physical Education",
+    "T019"
+  ],
+  "10A|0|2": [
+    "English",
+    "T010"
+  ],
+  "10A|1|8": [
+    "English",
+    "T010"
+  ],
+  "10A|2|6": [
+    "English",
+    "T010"
+  ],
+  "10A|3|1": [
+    "English",
+    "T010"
+  ],
+  "10A|4|5": [
+    "English",
+    "T010"
+  ],
+  "10A|0|5": [
+    "Mathematics",
+    "T009"
+  ],
+  "10A|0|6": [
+    "Mathematics",
+    "T009"
+  ],
+  "10A|1|4": [
+    "Mathematics",
+    "T009"
+  ],
+  "10A|3|0": [
+    "Mathematics",
+    "T009"
+  ],
+  "10A|3|5": [
+    "Mathematics",
+    "T009"
+  ],
+  "10A|4|9": [
+    "Mathematics",
+    "T009"
+  ],
+  "10A|0|1": [
+    "Physics",
+    "T011"
+  ],
+  "10A|1|1": [
+    "Physics",
+    "T011"
+  ],
+  "10A|1|9": [
+    "Physics",
+    "T011"
+  ],
+  "10A|2|4": [
+    "Physics",
+    "T011"
+  ],
+  "10A|1|5": [
+    "Chemistry",
+    "T012"
+  ],
+  "10A|2|1": [
+    "Chemistry",
+    "T012"
+  ],
+  "10A|2|8": [
+    "Chemistry",
+    "T012"
+  ],
+  "10A|3|4": [
+    "Chemistry",
+    "T012"
+  ],
+  "10A|1|0": [
+    "Biology",
+    "T013"
+  ],
+  "10A|2|2": [
+    "Biology",
+    "T013"
+  ],
+  "10A|2|5": [
+    "Biology",
+    "T013"
+  ],
+  "10A|4|6": [
+    "Biology",
+    "T013"
+  ],
+  "10A|1|2": [
+    "History",
+    "T018"
+  ],
+  "10A|2|0": [
+    "History",
+    "T018"
+  ],
+  "10A|3|6": [
+    "History",
+    "T018"
+  ],
+  "10A|4|0": [
+    "History",
+    "T018"
+  ],
+  "10A|0|8": [
+    "Computer Science",
+    "T020"
+  ],
+  "10A|4|1": [
+    "Computer Science",
+    "T020"
+  ],
+  "10A|4|2": [
+    "Computer Science",
+    "T020"
+  ],
+  "10A|2|9": [
+    "Physical Education",
+    "T019"
+  ],
+  "10A|3|8": [
+    "Physical Education",
+    "T019"
+  ],
+  "11SCI-MED|0|6": [
+    "Physics",
+    "T011"
+  ],
+  "11SCI-MED|0|9": [
+    "Physics",
+    "T011"
+  ],
+  "11SCI-MED|1|2": [
+    "Physics",
+    "T011"
+  ],
+  "11SCI-MED|1|8": [
+    "Physics",
+    "T011"
+  ],
+  "11SCI-MED|2|5": [
+    "Physics",
+    "T011"
+  ],
+  "11SCI-MED|3|5": [
+    "Physics",
+    "T011"
+  ],
+  "11SCI-MED|1|6": [
+    "Chemistry",
+    "T012"
+  ],
+  "11SCI-MED|3|0": [
+    "Chemistry",
+    "T012"
+  ],
+  "11SCI-MED|4|0": [
+    "Chemistry",
+    "T012"
+  ],
+  "11SCI-MED|4|1": [
+    "Chemistry",
+    "T012"
+  ],
+  "11SCI-MED|4|4": [
+    "Chemistry",
+    "T012"
+  ],
+  "11SCI-MED|4|6": [
+    "Chemistry",
+    "T012"
+  ],
+  "11SCI-MED|0|4": [
+    "Biology",
+    "T013"
+  ],
+  "11SCI-MED|1|5": [
+    "Biology",
+    "T013"
+  ],
+  "11SCI-MED|3|2": [
+    "Biology",
+    "T013"
+  ],
+  "11SCI-MED|3|9": [
+    "Biology",
+    "T013"
+  ],
+  "11SCI-MED|4|5": [
+    "Biology",
+    "T013"
+  ],
+  "11SCI-MED|4|8": [
+    "Biology",
+    "T013"
+  ],
+  "11SCI-MED|0|1": [
+    "English",
+    "T014"
+  ],
+  "11SCI-MED|1|1": [
+    "English",
+    "T014"
+  ],
+  "11SCI-MED|2|1": [
+    "English",
+    "T014"
+  ],
+  "11SCI-MED|2|9": [
+    "English",
+    "T014"
+  ],
+  "11SCI-MED|2|4": [
+    "Physical Education",
+    "T019"
+  ],
+  "11SCI-MED|4|2": [
+    "Physical Education",
+    "T019"
+  ],
+  "11SCI-NM|0|2": [
+    "Physics",
+    "T011"
+  ],
+  "11SCI-NM|0|4": [
+    "Physics",
+    "T011"
+  ],
+  "11SCI-NM|1|5": [
+    "Physics",
+    "T011"
+  ],
+  "11SCI-NM|2|0": [
+    "Physics",
+    "T011"
+  ],
+  "11SCI-NM|3|8": [
+    "Physics",
+    "T011"
+  ],
+  "11SCI-NM|4|4": [
+    "Physics",
+    "T011"
+  ],
+  "11SCI-NM|0|0": [
+    "Chemistry",
+    "T012"
+  ],
+  "11SCI-NM|0|6": [
+    "Chemistry",
+    "T012"
+  ],
+  "11SCI-NM|0|9": [
+    "Chemistry",
+    "T012"
+  ],
+  "11SCI-NM|2|4": [
+    "Chemistry",
+    "T012"
+  ],
+  "11SCI-NM|3|5": [
+    "Chemistry",
+    "T012"
+  ],
+  "11SCI-NM|4|2": [
+    "Chemistry",
+    "T012"
+  ],
+  "11SCI-NM|0|8": [
+    "Mathematics",
+    "T009"
+  ],
+  "11SCI-NM|1|0": [
+    "Mathematics",
+    "T009"
+  ],
+  "11SCI-NM|2|2": [
+    "Mathematics",
+    "T009"
+  ],
+  "11SCI-NM|2|5": [
+    "Mathematics",
+    "T009"
+  ],
+  "11SCI-NM|2|9": [
+    "Mathematics",
+    "T009"
+  ],
+  "11SCI-NM|4|8": [
+    "Mathematics",
+    "T009"
+  ],
+  "11SCI-NM|2|6": [
+    "Computer Science",
+    "T020"
+  ],
+  "11SCI-NM|3|2": [
+    "Computer Science",
+    "T020"
+  ],
+  "11SCI-NM|3|6": [
+    "Computer Science",
+    "T020"
+  ],
+  "11SCI-NM|4|6": [
+    "Computer Science",
+    "T020"
+  ],
+  "11SCI-NM|1|4": [
+    "English",
+    "T014"
+  ],
+  "11SCI-NM|1|8": [
+    "English",
+    "T014"
+  ],
+  "11SCI-NM|3|1": [
+    "English",
+    "T014"
+  ],
+  "11SCI-NM|4|0": [
+    "English",
+    "T014"
+  ],
+  "11SCI-NM|1|1": [
+    "Physical Education",
+    "T019"
+  ],
+  "11SCI-NM|2|8": [
+    "Physical Education",
+    "T019"
+  ],
+  "11COM-A|0|4": [
+    "Economics",
+    "T016"
+  ],
+  "11COM-A|1|5": [
+    "Economics",
+    "T016"
+  ],
+  "11COM-A|2|2": [
+    "Economics",
+    "T016"
+  ],
+  "11COM-A|3|2": [
+    "Economics",
+    "T016"
+  ],
+  "11COM-A|4|8": [
+    "Economics",
+    "T016"
+  ],
+  "11COM-A|4|9": [
+    "Economics",
+    "T016"
+  ],
+  "11COM-A|0|8": [
+    "Accountancy",
+    "T015"
+  ],
+  "11COM-A|1|1": [
+    "Accountancy",
+    "T015"
+  ],
+  "11COM-A|2|8": [
+    "Accountancy",
+    "T015"
+  ],
+  "11COM-A|3|5": [
+    "Accountancy",
+    "T015"
+  ],
+  "11COM-A|4|2": [
+    "Accountancy",
+    "T015"
+  ],
+  "11COM-A|4|6": [
+    "Accountancy",
+    "T015"
+  ],
+  "11COM-A|1|9": [
+    "English",
+    "T014"
+  ],
+  "11COM-A|2|0": [
+    "English",
+    "T014"
+  ],
+  "11COM-A|2|4": [
+    "English",
+    "T014"
+  ],
+  "11COM-A|3|0": [
+    "English",
+    "T014"
+  ],
+  "11COM-A|0|1": [
+    "Computer Science",
+    "T020"
+  ],
+  "11COM-A|2|5": [
+    "Computer Science",
+    "T020"
+  ],
+  "11COM-A|3|9": [
+    "Computer Science",
+    "T020"
+  ],
+  "11COM-A|4|0": [
+    "Computer Science",
+    "T020"
+  ],
+  "11COM-A|0|6": [
+    "Physical Education",
+    "T019"
+  ],
+  "11COM-A|4|5": [
+    "Physical Education",
+    "T019"
+  ],
+  "11HUM-A|0|0": [
+    "History",
+    "T018"
+  ],
+  "11HUM-A|0|1": [
+    "History",
+    "T018"
+  ],
+  "11HUM-A|1|6": [
+    "History",
+    "T018"
+  ],
+  "11HUM-A|2|2": [
+    "History",
+    "T018"
+  ],
+  "11HUM-A|2|9": [
+    "History",
+    "T018"
+  ],
+  "11HUM-A|4|4": [
+    "History",
+    "T018"
+  ],
+  "11HUM-A|0|8": [
+    "Political Science",
+    "T017"
+  ],
+  "11HUM-A|1|0": [
+    "Political Science",
+    "T017"
+  ],
+  "11HUM-A|3|1": [
+    "Political Science",
+    "T017"
+  ],
+  "11HUM-A|3|5": [
+    "Political Science",
+    "T017"
+  ],
+  "11HUM-A|4|2": [
+    "Political Science",
+    "T017"
+  ],
+  "11HUM-A|4|6": [
+    "Political Science",
+    "T017"
+  ],
+  "11HUM-A|0|5": [
+    "Economics",
+    "T016"
+  ],
+  "11HUM-A|1|2": [
+    "Economics",
+    "T016"
+  ],
+  "11HUM-A|1|9": [
+    "Economics",
+    "T016"
+  ],
+  "11HUM-A|2|5": [
+    "Economics",
+    "T016"
+  ],
+  "11HUM-A|4|1": [
+    "Economics",
+    "T016"
+  ],
+  "11HUM-A|0|2": [
+    "English",
+    "T014"
+  ],
+  "11HUM-A|1|5": [
+    "English",
+    "T014"
+  ],
+  "11HUM-A|3|8": [
+    "English",
+    "T014"
+  ],
+  "11HUM-A|4|9": [
+    "English",
+    "T014"
+  ],
+  "11HUM-A|2|0": [
+    "Physical Education",
+    "T019"
+  ],
+  "11HUM-A|3|2": [
+    "Physical Education",
+    "T019"
+  ],
+  "12SCI-MED|0|5": [
+    "Physics",
+    "T011"
+  ],
+  "12SCI-MED|0|8": [
+    "Physics",
+    "T011"
+  ],
+  "12SCI-MED|1|6": [
+    "Physics",
+    "T011"
+  ],
+  "12SCI-MED|2|2": [
+    "Physics",
+    "T011"
+  ],
+  "12SCI-MED|4|1": [
+    "Physics",
+    "T011"
+  ],
+  "12SCI-MED|4|5": [
+    "Physics",
+    "T011"
+  ],
+  "12SCI-MED|1|0": [
+    "Chemistry",
+    "T012"
+  ],
+  "12SCI-MED|1|8": [
+    "Chemistry",
+    "T012"
+  ],
+  "12SCI-MED|2|0": [
+    "Chemistry",
+    "T012"
+  ],
+  "12SCI-MED|2|5": [
+    "Chemistry",
+    "T012"
+  ],
+  "12SCI-MED|2|6": [
+    "Chemistry",
+    "T012"
+  ],
+  "12SCI-MED|2|9": [
+    "Chemistry",
+    "T012"
+  ],
+  "12SCI-MED|0|1": [
+    "Biology",
+    "T013"
+  ],
+  "12SCI-MED|0|2": [
+    "Biology",
+    "T013"
+  ],
+  "12SCI-MED|1|4": [
+    "Biology",
+    "T013"
+  ],
+  "12SCI-MED|3|1": [
+    "Biology",
+    "T013"
+  ],
+  "12SCI-MED|3|5": [
+    "Biology",
+    "T013"
+  ],
+  "12SCI-MED|4|0": [
+    "Biology",
+    "T013"
+  ],
+  "12SCI-MED|1|2": [
+    "English",
+    "T014"
+  ],
+  "12SCI-MED|3|6": [
+    "English",
+    "T014"
+  ],
+  "12SCI-MED|3|9": [
+    "English",
+    "T014"
+  ],
+  "12SCI-MED|4|8": [
+    "English",
+    "T014"
+  ],
+  "12SCI-MED|1|9": [
+    "Physical Education",
+    "T019"
+  ],
+  "12SCI-MED|4|4": [
+    "Physical Education",
+    "T019"
+  ],
+  "12SCI-NM|2|1": [
+    "Physics",
+    "T011"
+  ],
+  "12SCI-NM|2|6": [
+    "Physics",
+    "T011"
+  ],
+  "12SCI-NM|2|9": [
+    "Physics",
+    "T011"
+  ],
+  "12SCI-NM|3|0": [
+    "Physics",
+    "T011"
+  ],
+  "12SCI-NM|4|2": [
+    "Physics",
+    "T011"
+  ],
+  "12SCI-NM|4|9": [
+    "Physics",
+    "T011"
+  ],
+  "12SCI-NM|1|1": [
+    "Chemistry",
+    "T012"
+  ],
+  "12SCI-NM|1|4": [
+    "Chemistry",
+    "T012"
+  ],
+  "12SCI-NM|3|2": [
+    "Chemistry",
+    "T012"
+  ],
+  "12SCI-NM|3|6": [
+    "Chemistry",
+    "T012"
+  ],
+  "12SCI-NM|3|8": [
+    "Chemistry",
+    "T012"
+  ],
+  "12SCI-NM|3|9": [
+    "Chemistry",
+    "T012"
+  ],
+  "12SCI-NM|0|4": [
+    "Mathematics",
+    "T009"
+  ],
+  "12SCI-NM|1|9": [
+    "Mathematics",
+    "T009"
+  ],
+  "12SCI-NM|3|1": [
+    "Mathematics",
+    "T009"
+  ],
+  "12SCI-NM|3|4": [
+    "Mathematics",
+    "T009"
+  ],
+  "12SCI-NM|4|1": [
+    "Mathematics",
+    "T009"
+  ],
+  "12SCI-NM|4|4": [
+    "Mathematics",
+    "T009"
+  ],
+  "12SCI-NM|0|0": [
+    "Computer Science",
+    "T020"
+  ],
+  "12SCI-NM|1|0": [
+    "Computer Science",
+    "T020"
+  ],
+  "12SCI-NM|1|2": [
+    "Computer Science",
+    "T020"
+  ],
+  "12SCI-NM|1|6": [
+    "Computer Science",
+    "T020"
+  ],
+  "12SCI-NM|0|6": [
+    "English",
+    "T014"
+  ],
+  "12SCI-NM|0|9": [
+    "English",
+    "T014"
+  ],
+  "12SCI-NM|2|5": [
+    "English",
+    "T014"
+  ],
+  "12SCI-NM|4|5": [
+    "English",
+    "T014"
+  ],
+  "12SCI-NM|0|1": [
+    "Physical Education",
+    "T019"
+  ],
+  "12SCI-NM|0|2": [
+    "Physical Education",
+    "T019"
+  ],
+  "12COM-A|0|1": [
+    "Economics",
+    "T016"
+  ],
+  "12COM-A|1|1": [
+    "Economics",
+    "T016"
+  ],
+  "12COM-A|2|4": [
+    "Economics",
+    "T016"
+  ],
+  "12COM-A|2|8": [
+    "Economics",
+    "T016"
+  ],
+  "12COM-A|3|8": [
+    "Economics",
+    "T016"
+  ],
+  "12COM-A|4|2": [
+    "Economics",
+    "T016"
+  ],
+  "12COM-A|0|2": [
+    "Accountancy",
+    "T015"
+  ],
+  "12COM-A|1|4": [
+    "Accountancy",
+    "T015"
+  ],
+  "12COM-A|1|8": [
+    "Accountancy",
+    "T015"
+  ],
+  "12COM-A|2|5": [
+    "Accountancy",
+    "T015"
+  ],
+  "12COM-A|3|0": [
+    "Accountancy",
+    "T015"
+  ],
+  "12COM-A|4|8": [
+    "Accountancy",
+    "T015"
+  ],
+  "12COM-A|0|5": [
+    "English",
+    "T014"
+  ],
+  "12COM-A|3|5": [
+    "English",
+    "T014"
+  ],
+  "12COM-A|4|1": [
+    "English",
+    "T014"
+  ],
+  "12COM-A|4|4": [
+    "English",
+    "T014"
+  ],
+  "12COM-A|0|9": [
+    "Computer Science",
+    "T020"
+  ],
+  "12COM-A|2|1": [
+    "Computer Science",
+    "T020"
+  ],
+  "12COM-A|2|2": [
+    "Computer Science",
+    "T020"
+  ],
+  "12COM-A|3|1": [
+    "Computer Science",
+    "T020"
+  ],
+  "12COM-A|1|6": [
+    "Physical Education",
+    "T019"
+  ],
+  "12COM-A|4|6": [
+    "Physical Education",
+    "T019"
+  ],
+  "12HUM-A|0|2": [
+    "History",
+    "T018"
+  ],
+  "12HUM-A|0|9": [
+    "History",
+    "T018"
+  ],
+  "12HUM-A|1|5": [
+    "History",
+    "T018"
+  ],
+  "12HUM-A|2|6": [
+    "History",
+    "T018"
+  ],
+  "12HUM-A|3|8": [
+    "History",
+    "T018"
+  ],
+  "12HUM-A|4|8": [
+    "History",
+    "T018"
+  ],
+  "12HUM-A|0|1": [
+    "Political Science",
+    "T017"
+  ],
+  "12HUM-A|0|6": [
+    "Political Science",
+    "T017"
+  ],
+  "12HUM-A|1|1": [
+    "Political Science",
+    "T017"
+  ],
+  "12HUM-A|2|9": [
+    "Political Science",
+    "T017"
+  ],
+  "12HUM-A|3|6": [
+    "Political Science",
+    "T017"
+  ],
+  "12HUM-A|4|1": [
+    "Political Science",
+    "T017"
+  ],
+  "12HUM-A|1|4": [
+    "Economics",
+    "T016"
+  ],
+  "12HUM-A|2|1": [
+    "Economics",
+    "T016"
+  ],
+  "12HUM-A|3|1": [
+    "Economics",
+    "T016"
+  ],
+  "12HUM-A|3|5": [
+    "Economics",
+    "T016"
+  ],
+  "12HUM-A|4|4": [
+    "Economics",
+    "T016"
+  ],
+  "12HUM-A|0|4": [
+    "English",
+    "T014"
+  ],
+  "12HUM-A|0|8": [
+    "English",
+    "T014"
+  ],
+  "12HUM-A|3|4": [
+    "English",
+    "T014"
+  ],
+  "12HUM-A|4|6": [
+    "English",
+    "T014"
+  ],
+  "12HUM-A|1|8": [
+    "Physical Education",
+    "T019"
+  ],
+  "12HUM-A|2|5": [
+    "Physical Education",
+    "T019"
   ]
 }

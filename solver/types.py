@@ -43,6 +43,11 @@ class SolverContext:
     # Priority configurations for optimization
     priority_configs: List["ClassPriorityConfig"] = field(default_factory=list)
 
+    # Soft penalty variables created by constraints: list of (IntVar, weight)
+    soft_penalties: List[Tuple["cp_model.IntVar", int]] = field(default_factory=list)
+    # Diagnostics collected after solving: human-readable messages
+    diagnostics: List[str] = field(default_factory=list)
+
     def __post_init__(self):
         self.num_days = len(self.config.days)
         self.num_periods = self.config.periods_per_day

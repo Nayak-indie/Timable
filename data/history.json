@@ -1,5 +1,229 @@
 [
   {
+    "ts": "2026-05-15T22:24:41.390315",
+    "action": "export",
+    "target": "PDF",
+    "summary": "Exported all teacher timetables PDF",
+    "details": ""
+  },
+  {
+    "ts": "2026-05-15T22:24:19.492720",
+    "action": "export",
+    "target": "PDF",
+    "summary": "Exported all class timetables PDF",
+    "details": ""
+  },
+  {
+    "ts": "2026-05-15T22:24:09.393562",
+    "action": "generate",
+    "target": "Timetable",
+    "summary": "Generated clash‑free timetable",
+    "details": ""
+  },
+  {
+    "ts": "2026-05-15T22:14:44.988285",
+    "action": "export",
+    "target": "PDF",
+    "summary": "Exported all class timetables PDF",
+    "details": ""
+  },
+  {
+    "ts": "2026-05-15T22:13:45.495054",
+    "action": "export",
+    "target": "PDF",
+    "summary": "Exported all teacher timetables PDF",
+    "details": ""
+  },
+  {
+    "ts": "2026-05-15T22:13:24.907299",
+    "action": "generate",
+    "target": "Timetable",
+    "summary": "Generated clash‑free timetable",
+    "details": ""
+  },
+  {
+    "ts": "2026-05-15T22:11:37.288121",
+    "action": "generate",
+    "target": "Timetable",
+    "summary": "Generated clash‑free timetable",
+    "details": ""
+  },
+  {
+    "ts": "2026-05-15T22:11:30.126353",
+    "action": "generate",
+    "target": "Timetable",
+    "summary": "Generated clash‑free timetable",
+    "details": ""
+  },
+  {
+    "ts": "2026-05-15T22:05:51.165753",
+    "action": "generate",
+    "target": "Timetable",
+    "summary": "Generated clash‑free timetable",
+    "details": ""
+  },
+  {
+    "ts": "2026-05-15T21:48:31.602467",
+    "action": "generate",
+    "target": "Timetable",
+    "summary": "No solution found",
+    "details": ""
+  },
+  {
+    "ts": "2026-05-15T21:06:43.334977",
+    "action": "generate",
+    "target": "Timetable",
+    "summary": "No solution found",
+    "details": ""
+  },
+  {
+    "ts": "2026-05-15T21:04:55.764595",
+    "action": "generate",
+    "target": "Timetable",
+    "summary": "No solution found",
+    "details": ""
+  },
+  {
+    "ts": "2026-05-15T21:04:50.732444",
+    "action": "generate",
+    "target": "Timetable",
+    "summary": "No solution found",
+    "details": ""
+  },
+  {
+    "ts": "2026-05-15T20:52:01.691095",
+    "action": "export",
+    "target": "PDF",
+    "summary": "Exported all class timetables PDF",
+    "details": ""
+  },
+  {
+    "ts": "2026-05-15T20:51:46.383084",
+    "action": "generate",
+    "target": "Timetable",
+    "summary": "Generated clash‑free timetable",
+    "details": ""
+  },
+  {
+    "ts": "2026-05-15T20:45:42.452247",
+    "action": "export",
+    "target": "PDF",
+    "summary": "Exported all class timetables PDF",
+    "details": ""
+  },
+  {
+    "ts": "2026-05-15T20:45:32.819130",
+    "action": "generate",
+    "target": "Timetable",
+    "summary": "Generated clash‑free timetable",
+    "details": ""
+  },
+  {
+    "ts": "2026-05-15T20:37:09.839867",
+    "action": "export",
+    "target": "PDF",
+    "summary": "Exported all teacher timetables PDF",
+    "details": ""
+  },
+  {
+    "ts": "2026-05-15T20:36:43.607352",
+    "action": "export",
+    "target": "PDF",
+    "summary": "Exported all class timetables PDF",
+    "details": ""
+  },
+  {
+    "ts": "2026-05-15T20:36:35.270608",
+    "action": "generate",
+    "target": "Timetable",
+    "summary": "Generated clash‑free timetable",
+    "details": ""
+  },
+  {
+    "ts": "2026-05-15T20:29:13.028651",
+    "action": "export",
+    "target": "PDF",
+    "summary": "Exported all class timetables PDF",
+    "details": ""
+  },
+  {
+    "ts": "2026-05-15T20:29:04.051248",
+    "action": "generate",
+    "target": "Timetable",
+    "summary": "Generated clash‑free timetable",
+    "details": ""
+  },
+  {
+    "ts": "2026-05-15T20:24:19.617397",
+    "action": "generate",
+    "target": "Timetable",
+    "summary": "Generated clash‑free timetable",
+    "details": ""
+  },
+  {
+    "ts": "2026-05-15T20:24:00.404657",
+    "action": "generate",
+    "target": "Timetable",
+    "summary": "Generated clash‑free timetable",
+    "details": ""
+  },
+  {
+    "ts": "2026-05-15T20:23:20.395440",
+    "action": "generate",
+    "target": "Timetable",
+    "summary": "Generated clash‑free timetable",
+    "details": ""
+  },
+  {
+    "ts": "2026-05-15T20:21:27.949480",
+    "action": "generate",
+    "target": "Timetable",
+    "summary": "Generated clash‑free timetable",
+    "details": ""
+  },
+  {
+    "ts": "2026-05-15T20:20:26.360182",
+    "action": "generate",
+    "target": "Timetable",
+    "summary": "Generated clash‑free timetable",
+    "details": ""
+  },
+  {
+    "ts": "2026-05-15T19:59:38.728084",
+    "action": "export",
+    "target": "PDF",
+    "summary": "Exported all class timetables PDF",
+    "details": ""
+  },
+  {
+    "ts": "2026-05-15T19:55:10.694443",
+    "action": "generate",
+    "target": "Timetable",
+    "summary": "Generated clash‑free timetable",
+    "details": ""
+  },
+  {
+    "ts": "2026-05-15T19:41:38.376315",
+    "action": "generate",
+    "target": "Timetable",
+    "summary": "Generated clash‑free timetable",
+    "details": ""
+  },
+  {
+    "ts": "2026-05-15T19:26:04.612894",
+    "action": "generate",
+    "target": "Timetable",
+    "summary": "Generated clash‑free timetable",
+    "details": ""
+  },
+  {
+    "ts": "2026-05-15T19:24:59.121206",
+    "action": "generate",
+    "target": "Timetable",
+    "summary": "No solution found",
+    "details": ""
+  },
+  {
     "ts": "2026-05-15T19:08:52.325852",
     "action": "generate",
     "target": "Timetable",

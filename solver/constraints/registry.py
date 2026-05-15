@@ -4,6 +4,10 @@ from typing import Dict, List
 
 from solver.constraints.base import Constraint
 
+from .teacher_clash import TeacherClashConstraint
+from .class_gap_constraint import ClassGapConstraint
+from .class_free_periods import ClassFreePeriodsConstraint
+
 
 class ConstraintRegistry:
     """Manages constraint registration and enables/disables them dynamically."""
@@ -11,6 +15,11 @@ class ConstraintRegistry:
     def __init__(self):
         self._constraints: Dict[str, Constraint] = {}
         self._enabled: Dict[str, bool] = {}
+
+        # Register constraints here
+        self.register(TeacherClashConstraint())
+        self.register(ClassGapConstraint())
+        self.register(ClassFreePeriodsConstraint())
 
     def register(self, constraint: Constraint) -> None:
         self._constraints[constraint.name] = constraint
@@ -29,7 +38,8 @@ class ConstraintRegistry:
 
     def get_active(self) -> List[Constraint]:
         return [
-            c for name, c in self._constraints.items() if self._enabled.get(name, False)
+            c for name, c in self._constraints.items()
+            if self._enabled.get(name, False)
         ]
 
     def get_all(self) -> List[Constraint]:
